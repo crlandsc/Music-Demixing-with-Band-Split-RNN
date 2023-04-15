@@ -17,6 +17,8 @@ from model import BandSplitRNN, PLModel
 import logging
 import traceback
 
+import wandb
+
 log = logging.getLogger(__name__)
 
 
@@ -133,6 +135,13 @@ def initialize_utils(
     # initialize logger and callbacks
     logger = instantiate(cfg.logger)
     callbacks = list(instantiate(cfg.callbacks).values())
+
+    # Initialize wandb loger
+    # for wandb_logger in [l for l in logger if isinstance(l, WandbLogger)]:
+    #         utils.wandb_login(key=cfg.wandb_api_key)
+    #         # utils.wandb_watch_all(wandb_logger, model) # TODO buggy
+    #         break
+
     return logger, callbacks
 
 

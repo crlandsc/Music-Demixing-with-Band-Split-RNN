@@ -1,0 +1,6 @@
+python3 inference.py\
+    --in-path ../example/test1/mixture_test1.wav\
+    --out-path ../example/test1/\
+    --target bass\
+    --ckpt-path saved_models/bass/bass.pth\
+    --device cpu
