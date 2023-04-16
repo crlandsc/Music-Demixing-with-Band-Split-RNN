@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "prepare_dataset",
+            "type": "python",
+            "cwd": "${workspaceRoot}/src",
+            "request": "launch",
+            "program": "prepare_dataset.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--input-dir=/home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18/",
+                "--output-dir=./files/",
+                "--subset=train", // train, test
+                "--split=train", // train, valid, or none
+                "--sad-cfg-path=./conf/sad/default.yaml",
+                "--target=vocals" // vocals, bass, drums, other
+            ]
+        },
+        {
+            "name": "Train",
+            "type": "python",
+            "cwd": "${workspaceRoot}/src",
+            "request": "launch",
+            "program": "train.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+            // "args": [
+            //     "--device=cpu"
+            // //     "train_dataset.target=bass ", // bass, drums, other
+            // //     "model=model" // bandsplitrnnbass, bandsplitrnndrums
+            // ]
+        }
+    ]
+}

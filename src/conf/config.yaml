@@ -8,17 +8,18 @@ defaults:
   - augmentations: default
   - featurizer: stft
   - callbacks: default
+  - logger: ['tensorboard','wandb'] # set logger here or use command line (e.g. python run.py logger=['tensorboard','wandb'])
   - _self_
 
 # data
 train_loader:
-  batch_size: 4
-  num_workers: 8
+  batch_size: 4 # 2
+  num_workers: 4
   shuffle: True
   drop_last: True
 val_loader:
-  batch_size: 4
-  num_workers: 8
+  batch_size: 4 # 2
+  num_workers: 4
   shuffle: False
   drop_last: False
 
@@ -39,23 +40,24 @@ sch:
 
 ckpt_path: null
 
-logger:
-  _target_: pytorch_lightning.loggers.TensorBoardLogger
-  save_dir: "/tb_logs"
-  name: ""
-  version: ""
-  default_hp_metric: False
+# Remove when fully integrated
+# logger:
+#   _target_: pytorch_lightning.loggers.TensorBoardLogger
+#   save_dir: "/tb_logs"
+#   name: ""
+#   version: ""
+#   default_hp_metric: False
 
 trainer:
   fast_dev_run: False
-  max_epochs: 250
+  max_epochs: 500
   check_val_every_n_epoch: 1
-  num_sanity_val_steps: 5
-  log_every_n_steps: 100
-  accelerator: "auto"
-  devices: 1
+  num_sanity_val_steps: 5 # 5
+  log_every_n_steps: 10 # 100
+  accelerator: gpu # "auto", gpu
+  devices: 1 # can increase devices with more gpus available
   gradient_clip_val: 5
-  precision: 32
+  precision: 16 # 16 for lower memory load, 32 for better accuracy
   enable_progress_bar: True
   benchmark: True
   deterministic: False
@@ -67,3 +69,6 @@ hydra:
     dir: logs/${...experiment_dirname}/${now:%Y-%m-%d}_${now:%H-%M}
   job:
     chdir: False
+
+# wandb
+wandb_api_key: ${oc.env:WANDB_API_KEY}

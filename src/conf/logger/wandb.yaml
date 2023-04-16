@@ -1,0 +1,15 @@
+# https://wandb.ai
+
+wandb:
+  _target_: pytorch_lightning.loggers.WandbLogger
+  project: mdx_${train_dataset.target}
+  name: mdx_vocals
+  save_dir: "wandb_logs"
+  offline: False # set True to store all logs only locally
+  id: null # pass correct id to resume experiment!
+  # entity: ""  # set to name of your wandb team or just remove it
+  log_model: False
+  prefix: ""
+  job_type: "train"
+  group: ""
+  tags: []

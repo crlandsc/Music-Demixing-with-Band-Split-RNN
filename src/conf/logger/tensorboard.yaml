@@ -1,0 +1,10 @@
+# https://www.tensorflow.org/tensorboard/
+
+tensorboard:
+  _target_: pytorch_lightning.loggers.TensorBoardLogger
+  save_dir: "/tb_logs"
+  name: ""
+  version: ""
+  log_graph: False
+  default_hp_metric: False
+  prefix: ""

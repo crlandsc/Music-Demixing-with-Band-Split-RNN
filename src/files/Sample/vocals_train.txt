@@ -1,0 +1,113 @@
+A Classic Education - NightOwl	0	264600
+A Classic Education - NightOwl	132300	396900
+A Classic Education - NightOwl	264600	529200
+A Classic Education - NightOwl	396900	661500
+A Classic Education - NightOwl	529200	793800
+A Classic Education - NightOwl	661500	926100
+A Classic Education - NightOwl	793800	1058400
+A Classic Education - NightOwl	926100	1190700
+A Classic Education - NightOwl	1058400	1323000
+A Classic Education - NightOwl	1190700	1455300
+A Classic Education - NightOwl	1323000	1587600
+A Classic Education - NightOwl	1455300	1719900
+A Classic Education - NightOwl	1587600	1852200
+A Classic Education - NightOwl	1719900	1984500
+A Classic Education - NightOwl	1852200	2116800
+A Classic Education - NightOwl	1984500	2249100
+A Classic Education - NightOwl	2116800	2381400
+A Classic Education - NightOwl	2249100	2513700
+A Classic Education - NightOwl	2381400	2646000
+A Classic Education - NightOwl	2513700	2778300
+A Classic Education - NightOwl	2646000	2910600
+A Classic Education - NightOwl	2778300	3042900
+A Classic Education - NightOwl	2910600	3175200
+A Classic Education - NightOwl	3042900	3307500
+A Classic Education - NightOwl	3175200	3439800
+A Classic Education - NightOwl	3307500	3572100
+A Classic Education - NightOwl	3439800	3704400
+A Classic Education - NightOwl	3572100	3836700
+A Classic Education - NightOwl	3704400	3969000
+A Classic Education - NightOwl	3836700	4101300
+A Classic Education - NightOwl	3969000	4233600
+A Classic Education - NightOwl	4101300	4365900
+A Classic Education - NightOwl	4233600	4498200
+A Classic Education - NightOwl	4365900	4630500
+A Classic Education - NightOwl	4498200	4762800
+A Classic Education - NightOwl	4630500	4895100
+A Classic Education - NightOwl	4762800	5027400
+A Classic Education - NightOwl	4895100	5159700
+A Classic Education - NightOwl	5027400	5292000
+A Classic Education - NightOwl	5159700	5424300
+A Classic Education - NightOwl	5292000	5556600
+A Classic Education - NightOwl	5424300	5688900
+A Classic Education - NightOwl	5556600	5821200
+A Classic Education - NightOwl	5688900	5953500
+A Classic Education - NightOwl	5821200	6085800
+A Classic Education - NightOwl	5953500	6218100
+A Classic Education - NightOwl	6085800	6350400
+A Classic Education - NightOwl	6218100	6482700
+A Classic Education - NightOwl	6350400	6615000
+A Classic Education - NightOwl	6482700	6747300
+A Classic Education - NightOwl	6615000	6879600
+A Classic Education - NightOwl	6747300	7011900
+A Classic Education - NightOwl	6879600	7144200
+A Classic Education - NightOwl	7011900	7276500
+A Classic Education - NightOwl	7144200	7408800
+A Classic Education - NightOwl	7276500	7541100
+Actions - Devil's Words	926100	1190700
+Actions - Devil's Words	1058400	1323000
+Actions - Devil's Words	1190700	1455300
+Actions - Devil's Words	1323000	1587600
+Actions - Devil's Words	1455300	1719900
+Actions - Devil's Words	1587600	1852200
+Actions - Devil's Words	1719900	1984500
+Actions - Devil's Words	1852200	2116800
+Actions - Devil's Words	1984500	2249100
+Actions - Devil's Words	2116800	2381400
+Actions - Devil's Words	2249100	2513700
+Actions - Devil's Words	2381400	2646000
+Actions - Devil's Words	2513700	2778300
+Actions - Devil's Words	2646000	2910600
+Actions - Devil's Words	2778300	3042900
+Actions - Devil's Words	2910600	3175200
+Actions - Devil's Words	3042900	3307500
+Actions - Devil's Words	3175200	3439800
+Actions - Devil's Words	3307500	3572100
+Actions - Devil's Words	3439800	3704400
+Actions - Devil's Words	3572100	3836700
+Actions - Devil's Words	3704400	3969000
+Actions - Devil's Words	3836700	4101300
+Actions - Devil's Words	3969000	4233600
+Actions - Devil's Words	4101300	4365900
+Actions - Devil's Words	4233600	4498200
+Actions - Devil's Words	4365900	4630500
+Actions - Devil's Words	4498200	4762800
+Actions - Devil's Words	4630500	4895100
+Actions - Devil's Words	4762800	5027400
+Actions - Devil's Words	4895100	5159700
+Actions - Devil's Words	5027400	5292000
+Actions - Devil's Words	5159700	5424300
+Actions - Devil's Words	5292000	5556600
+Actions - Devil's Words	5424300	5688900
+Actions - Devil's Words	5556600	5821200
+Actions - Devil's Words	5688900	5953500
+Actions - Devil's Words	5821200	6085800
+Actions - Devil's Words	5953500	6218100
+Actions - Devil's Words	6085800	6350400
+Actions - Devil's Words	6218100	6482700
+Actions - Devil's Words	6350400	6615000
+Actions - Devil's Words	6482700	6747300
+Actions - Devil's Words	6615000	6879600
+Actions - Devil's Words	6747300	7011900
+Actions - Devil's Words	6879600	7144200
+Actions - Devil's Words	7011900	7276500
+Actions - Devil's Words	7144200	7408800
+Actions - Devil's Words	7276500	7541100
+Actions - Devil's Words	7408800	7673400
+Actions - Devil's Words	7541100	7805700
+Actions - Devil's Words	7673400	7938000
+Actions - Devil's Words	7805700	8070300
+Actions - Devil's Words	7938000	8202600
+Actions - Devil's Words	8070300	8334900
+Actions - Devil's Words	8202600	8467200
+Actions - Devil's Words	8334900	8599500

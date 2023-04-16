@@ -1,0 +1,7 @@
+python3 prepare_dataset.py\
+    --input-dir /home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18-test/\
+    --output-dir ./files/\
+    --subset train\
+    --split train\
+    --sad-cfg-path ./conf/sad/default.yaml\
+    --target vocals

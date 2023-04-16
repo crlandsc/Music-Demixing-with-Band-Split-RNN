@@ -7,13 +7,13 @@ bandsplits:
   - [16000, 1000]
   - [20000, 2000]
 bottleneck_layer: "rnn"
-t_timesteps: 263
-fc_dim: 128
-rnn_dim: 256
+t_timesteps: 263 #263
+fc_dim: 64 # 128
+rnn_dim: 128 # 256
 rnn_type: "LSTM"
 bidirectional: True
-num_layers: 12
-mlp_dim: 512
+num_layers: 1 #12
+mlp_dim: 256 #512
 return_mask: False
 
 complex_as_channel: True

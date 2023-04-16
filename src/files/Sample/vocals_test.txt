@@ -1,0 +1,192 @@
+AM Contra - Heart Peripheral	0	264600
+AM Contra - Heart Peripheral	132300	396900
+AM Contra - Heart Peripheral	264600	529200
+AM Contra - Heart Peripheral	396900	661500
+AM Contra - Heart Peripheral	529200	793800
+AM Contra - Heart Peripheral	661500	926100
+AM Contra - Heart Peripheral	793800	1058400
+AM Contra - Heart Peripheral	926100	1190700
+AM Contra - Heart Peripheral	1058400	1323000
+AM Contra - Heart Peripheral	1190700	1455300
+AM Contra - Heart Peripheral	1323000	1587600
+AM Contra - Heart Peripheral	1455300	1719900
+AM Contra - Heart Peripheral	1587600	1852200
+AM Contra - Heart Peripheral	1719900	1984500
+AM Contra - Heart Peripheral	1852200	2116800
+AM Contra - Heart Peripheral	1984500	2249100
+AM Contra - Heart Peripheral	2116800	2381400
+AM Contra - Heart Peripheral	2249100	2513700
+AM Contra - Heart Peripheral	2381400	2646000
+AM Contra - Heart Peripheral	2513700	2778300
+AM Contra - Heart Peripheral	2646000	2910600
+AM Contra - Heart Peripheral	2778300	3042900
+AM Contra - Heart Peripheral	2910600	3175200
+AM Contra - Heart Peripheral	3042900	3307500
+AM Contra - Heart Peripheral	3175200	3439800
+AM Contra - Heart Peripheral	3307500	3572100
+AM Contra - Heart Peripheral	3439800	3704400
+AM Contra - Heart Peripheral	3572100	3836700
+AM Contra - Heart Peripheral	3704400	3969000
+AM Contra - Heart Peripheral	3836700	4101300
+AM Contra - Heart Peripheral	3969000	4233600
+AM Contra - Heart Peripheral	4101300	4365900
+AM Contra - Heart Peripheral	4233600	4498200
+AM Contra - Heart Peripheral	4365900	4630500
+AM Contra - Heart Peripheral	4498200	4762800
+AM Contra - Heart Peripheral	4630500	4895100
+AM Contra - Heart Peripheral	4762800	5027400
+AM Contra - Heart Peripheral	4895100	5159700
+AM Contra - Heart Peripheral	5027400	5292000
+AM Contra - Heart Peripheral	5159700	5424300
+AM Contra - Heart Peripheral	5292000	5556600
+AM Contra - Heart Peripheral	5424300	5688900
+AM Contra - Heart Peripheral	5556600	5821200
+AM Contra - Heart Peripheral	5688900	5953500
+AM Contra - Heart Peripheral	5821200	6085800
+AM Contra - Heart Peripheral	5953500	6218100
+AM Contra - Heart Peripheral	6085800	6350400
+AM Contra - Heart Peripheral	6218100	6482700
+AM Contra - Heart Peripheral	6350400	6615000
+AM Contra - Heart Peripheral	6482700	6747300
+AM Contra - Heart Peripheral	6615000	6879600
+AM Contra - Heart Peripheral	6747300	7011900
+AM Contra - Heart Peripheral	6879600	7144200
+AM Contra - Heart Peripheral	7011900	7276500
+AM Contra - Heart Peripheral	7144200	7408800
+AM Contra - Heart Peripheral	7276500	7541100
+AM Contra - Heart Peripheral	7408800	7673400
+AM Contra - Heart Peripheral	7541100	7805700
+AM Contra - Heart Peripheral	7673400	7938000
+AM Contra - Heart Peripheral	7805700	8070300
+AM Contra - Heart Peripheral	7938000	8202600
+AM Contra - Heart Peripheral	8070300	8334900
+AM Contra - Heart Peripheral	8202600	8467200
+AM Contra - Heart Peripheral	8334900	8599500
+AM Contra - Heart Peripheral	8467200	8731800
+AM Contra - Heart Peripheral	8599500	8864100
+AM Contra - Heart Peripheral	8731800	8996400
+AM Contra - Heart Peripheral	8864100	9128700
+AM Contra - Heart Peripheral	8996400	9261000
+Al James - Schoolboy Facination	0	264600
+Al James - Schoolboy Facination	132300	396900
+Al James - Schoolboy Facination	264600	529200
+Al James - Schoolboy Facination	396900	661500
+Al James - Schoolboy Facination	529200	793800
+Al James - Schoolboy Facination	661500	926100
+Al James - Schoolboy Facination	793800	1058400
+Al James - Schoolboy Facination	926100	1190700
+Al James - Schoolboy Facination	1058400	1323000
+Al James - Schoolboy Facination	1190700	1455300
+Al James - Schoolboy Facination	1323000	1587600
+Al James - Schoolboy Facination	1455300	1719900
+Al James - Schoolboy Facination	1587600	1852200
+Al James - Schoolboy Facination	1719900	1984500
+Al James - Schoolboy Facination	1852200	2116800
+Al James - Schoolboy Facination	1984500	2249100
+Al James - Schoolboy Facination	2116800	2381400
+Al James - Schoolboy Facination	2249100	2513700
+Al James - Schoolboy Facination	2381400	2646000
+Al James - Schoolboy Facination	2513700	2778300
+Al James - Schoolboy Facination	2646000	2910600
+Al James - Schoolboy Facination	2778300	3042900
+Al James - Schoolboy Facination	2910600	3175200
+Al James - Schoolboy Facination	3042900	3307500
+Al James - Schoolboy Facination	3175200	3439800
+Al James - Schoolboy Facination	3307500	3572100
+Al James - Schoolboy Facination	3439800	3704400
+Al James - Schoolboy Facination	3572100	3836700
+Al James - Schoolboy Facination	3704400	3969000
+Al James - Schoolboy Facination	3836700	4101300
+Al James - Schoolboy Facination	3969000	4233600
+Al James - Schoolboy Facination	4101300	4365900
+Al James - Schoolboy Facination	4233600	4498200
+Al James - Schoolboy Facination	4365900	4630500
+Al James - Schoolboy Facination	4498200	4762800
+Al James - Schoolboy Facination	4630500	4895100
+Al James - Schoolboy Facination	4762800	5027400
+Al James - Schoolboy Facination	4895100	5159700
+Al James - Schoolboy Facination	5027400	5292000
+Al James - Schoolboy Facination	5159700	5424300
+Al James - Schoolboy Facination	5292000	5556600
+Al James - Schoolboy Facination	5424300	5688900
+Al James - Schoolboy Facination	5556600	5821200
+Al James - Schoolboy Facination	5688900	5953500
+Al James - Schoolboy Facination	5821200	6085800
+Al James - Schoolboy Facination	5953500	6218100
+Al James - Schoolboy Facination	6085800	6350400
+Al James - Schoolboy Facination	6218100	6482700
+Al James - Schoolboy Facination	6350400	6615000
+Al James - Schoolboy Facination	6482700	6747300
+Al James - Schoolboy Facination	6615000	6879600
+Al James - Schoolboy Facination	6747300	7011900
+Al James - Schoolboy Facination	6879600	7144200
+Al James - Schoolboy Facination	7011900	7276500
+Al James - Schoolboy Facination	7144200	7408800
+Al James - Schoolboy Facination	7276500	7541100
+Al James - Schoolboy Facination	7408800	7673400
+Al James - Schoolboy Facination	7541100	7805700
+Al James - Schoolboy Facination	7673400	7938000
+Al James - Schoolboy Facination	7805700	8070300
+Al James - Schoolboy Facination	7938000	8202600
+Al James - Schoolboy Facination	8070300	8334900
+Al James - Schoolboy Facination	8202600	8467200
+Al James - Schoolboy Facination	8334900	8599500
+Al James - Schoolboy Facination	8467200	8731800
+Angels In Amplifiers - I'm Alright	0	264600
+Angels In Amplifiers - I'm Alright	132300	396900
+Angels In Amplifiers - I'm Alright	264600	529200
+Angels In Amplifiers - I'm Alright	396900	661500
+Angels In Amplifiers - I'm Alright	529200	793800
+Angels In Amplifiers - I'm Alright	661500	926100
+Angels In Amplifiers - I'm Alright	793800	1058400
+Angels In Amplifiers - I'm Alright	926100	1190700
+Angels In Amplifiers - I'm Alright	1058400	1323000
+Angels In Amplifiers - I'm Alright	1190700	1455300
+Angels In Amplifiers - I'm Alright	1323000	1587600
+Angels In Amplifiers - I'm Alright	1455300	1719900
+Angels In Amplifiers - I'm Alright	1587600	1852200
+Angels In Amplifiers - I'm Alright	1719900	1984500
+Angels In Amplifiers - I'm Alright	1852200	2116800
+Angels In Amplifiers - I'm Alright	1984500	2249100
+Angels In Amplifiers - I'm Alright	2116800	2381400
+Angels In Amplifiers - I'm Alright	2249100	2513700
+Angels In Amplifiers - I'm Alright	2381400	2646000
+Angels In Amplifiers - I'm Alright	2513700	2778300
+Angels In Amplifiers - I'm Alright	2646000	2910600
+Angels In Amplifiers - I'm Alright	2778300	3042900
+Angels In Amplifiers - I'm Alright	2910600	3175200
+Angels In Amplifiers - I'm Alright	3042900	3307500
+Angels In Amplifiers - I'm Alright	3175200	3439800
+Angels In Amplifiers - I'm Alright	3307500	3572100
+Angels In Amplifiers - I'm Alright	3439800	3704400
+Angels In Amplifiers - I'm Alright	3572100	3836700
+Angels In Amplifiers - I'm Alright	3704400	3969000
+Angels In Amplifiers - I'm Alright	3836700	4101300
+Angels In Amplifiers - I'm Alright	3969000	4233600
+Angels In Amplifiers - I'm Alright	4101300	4365900
+Angels In Amplifiers - I'm Alright	4233600	4498200
+Angels In Amplifiers - I'm Alright	4365900	4630500
+Angels In Amplifiers - I'm Alright	4498200	4762800
+Angels In Amplifiers - I'm Alright	4630500	4895100
+Angels In Amplifiers - I'm Alright	4762800	5027400
+Angels In Amplifiers - I'm Alright	4895100	5159700
+Angels In Amplifiers - I'm Alright	5027400	5292000
+Angels In Amplifiers - I'm Alright	5159700	5424300
+Angels In Amplifiers - I'm Alright	5292000	5556600
+Angels In Amplifiers - I'm Alright	5424300	5688900
+Angels In Amplifiers - I'm Alright	5556600	5821200
+Angels In Amplifiers - I'm Alright	5688900	5953500
+Angels In Amplifiers - I'm Alright	5821200	6085800
+Angels In Amplifiers - I'm Alright	5953500	6218100
+Angels In Amplifiers - I'm Alright	6085800	6350400
+Angels In Amplifiers - I'm Alright	6218100	6482700
+Angels In Amplifiers - I'm Alright	6350400	6615000
+Angels In Amplifiers - I'm Alright	6482700	6747300
+Angels In Amplifiers - I'm Alright	6615000	6879600
+Angels In Amplifiers - I'm Alright	6747300	7011900
+Angels In Amplifiers - I'm Alright	6879600	7144200
+Angels In Amplifiers - I'm Alright	7011900	7276500
+Angels In Amplifiers - I'm Alright	7144200	7408800
+Angels In Amplifiers - I'm Alright	7276500	7541100
+Angels In Amplifiers - I'm Alright	7408800	7673400
+Angels In Amplifiers - I'm Alright	7541100	7805700

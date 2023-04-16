@@ -93,8 +93,8 @@ def run_program(
 
 
 def main(
-        db_dir: str,
-        save_dir: str,
+        input_dir: str,
+        output_dir: str,
         subset: str,
         split: tp.Optional[str],
         targets: tp.List[str],
@@ -103,7 +103,7 @@ def main(
     # initialize MUSDB parser
     split = None if subset == 'test' else split
     db = musdb.DB(
-        root=db_dir,
+        root=input_dir,
         subsets=subset,
         split=split,
         download=False,
@@ -114,16 +114,16 @@ def main(
     sad = SAD(**sad_cfg)
 
     # initialize directories where to save indices
-    save_dir = Path(save_dir)
-    save_dir.mkdir(exist_ok=True)
+    output_dir = Path(output_dir)
+    output_dir.mkdir(exist_ok=True)
 
     for target in targets:
         if subset == split == 'train':
-            file_path = save_dir / f"{target}_train.txt"
+            file_path = output_dir / f"{target}_train.txt"
         elif subset == 'train' and split == 'valid':
-            file_path = save_dir / f"{target}_valid.txt"
+            file_path = output_dir / f"{target}_valid.txt"
         else:
-            file_path = save_dir / f"{target}_test.txt"
+            file_path = output_dir / f"{target}_test.txt"
         # segment data and save indices to .txt file
         run_program(file_path, target, db, sad)
 
@@ -132,8 +132,8 @@ def main(
 
 if __name__ == '__main__':
     main(
-        args.db_dir,
-        args.save_dir,
+        args.input_dir, #db_dir,
+        args.output_dir, #save_dir,
         args.subset,
         args.split,
         args.targets,

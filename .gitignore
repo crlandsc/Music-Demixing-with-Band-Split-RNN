@@ -3,6 +3,10 @@
 *.pyc
 **/*.ipynb
 
+inference_script.txt
+train_scripts.txt
+env_vars.txt
+
 # ignore checkpoint files due to their large size
 *.pt
 *.pth
@@ -132,9 +136,9 @@ celerybeat.pid
 
 # Environments
 # may want .env depending on development of code
-# .env
+.env
 .venv
-# env/
+env/
 venv/
 ENV/
 env.bak/
