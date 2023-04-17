@@ -1,25 +1,143 @@
-# BandSplitRNN Pytorch
+<div align="center">
+    <img src="./images/CL Banner.png"/>
+</div>
 
-Unofficial PyTorch implementation of the paper [Music Source Separation with Band-split RNN](https://arxiv.org/pdf/2209.15174.pdf).
+<h1 style="text-align:center">
+    Music "Demixing" with Band Split Recurrent Neural Network
+</h1>
 
-![architecture](images/architecture.png)
+The repository has been modified from [Amantur](https://github.com/amanteur/BandSplitRNN-Pytorch) and is an unofficial PyTorch implementation of the paper [Music Source Separation with Band-split RNN](https://arxiv.org/pdf/2209.15174.pdf). Huge thank you to both for promoting this work!
 
 ---
 ## Table of Contents
 
-1. [Dependencies](#dependencies)
-2. [Inference](#inference)
-3. [Train your model](#trainmodel)
+1. [Problem Statement](#problem-statement)
+2. [Background](#background)
+3. [Architecture](#architecture)
+4. [Datasets](#datasets)
+5. [Exploratory Data Analysis (EDA)](#eda)
+6. [Dependencies](#dependencies)
+7. [Inference](#inference)
+8. [Train your model](#trainmodel)
    1. [Dataset preprocessing](#preprocessing)
    2. [Training](#train)
    3. [Evaluation](#eval)
-4. [Repository structure](#structure)
-5. [Citing](#cite)
+9. [Repository structure](#structure)
+10. [Citing](#cite)
 
 ---
+
+<a name="problem-statement"/>
+
+## Problem Statement
+Audio source separation has been a topic of interest for quite some time, but has gained increasing attention recently due an increase in computing power and the capabilities of neural networks. Source separation can be implemented to improve speech clarity in particularly noisy environment or, in our case, separate individual instruments from a song. There are many use cases for this technology, like music remixing, music information retrieval, and music education. This work seeks to review and improve upon current methods of audio source separation.
+
+---
+
+<a name="background"/>
+
+## Background
+When listening to music, humans inately can pick out the instruments within the complex mix of sounds. For example, it is trivial to pick out the drum set, guitar, bass, and of course the vocalist. However, there is no way to retrieve these isolated instruments that our mind "separates" or picks out from the music. It would follow that if our brains can process music in this manner, it is possible to develop algorithms that can do the same.
+
+Methods of music source separation have been around in various forms for quite some time, but only recently has the ability to separate audio in high fidelity begun to be possible. This is due to the significant increase in computing capability over the recent years that has made training complex neural networks feasible. These "deep neural networks" (DNNs) can be trained on audio data by providing the fully "mixed" song as well as the isolated instrument "stem" to act as the target. The network then can learn how to pick out the frequencies and patterns that correlate to the individual instrument.
+
+Since 2018, there have been many improvements on methods of source separation using neural networks. While many metrics can describe the performance of a model, it has become standard to use Signal-to-Distortion ratio (SDR) as the primary model performance metric. Below is a chart that demonstrates the improvement of various methods since 2018. Models were measured on how they performed on the [MUSDB18 dataset](https://paperswithcode.com/dataset/musdb18).
+
+<div style="text-align:center;">
+  <img src="./images/source_separation_methods.png" alt="source separation methods" width="70%">
+</div>
+<p style="text-align:center">
+  <em>Figure: Audio Source Separation Methods (<a href="https://paperswithcode.com/sota/music-source-separation-on-musdb18">source: paperswithcode.com</a>)</em>
+</p>
+
+|Rank|Model|SDR (avg)|SDR (vocals)|SDR (drums)|SDR (bass)|SDR (other)|Extra Training Data|Paper|Year|
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | Sparse HT Demucs (fine tuned) | 9.2 | 9.37 | 10.83 | 10.47 | 6.41 | Y | Hybrid Transformers for Music Source Separation | 2022 |
+| 2 | Hybrid Transformer Demucs (find tuned) | 9 | 9.2 | 10.08 | 9.78 | 6.42 | Y | Hybrid Transformers for Music Source Separation | 2022 |
+| 3 | Band-Split RNN (semi-sup.) | 8.97 | 10.47 | 10.15 | 8.16 | 7.08 | Y | Music Source Separation with Band-split RNN | 2022 |
+| 4 | Band-Split RNN | 8.24 | 10.01 | 9.01 | 7.22 | 6.7 | N | Music Source Separation with Band-split RNN | 2022 |
+| 5 | Hybrid Demucs | 7.68 | 8.13 | 8.24 | 8.76 | 5.59 | N | Hybrid Spectrogram and Waveform Source Separation | 2021 |
+| 6 | KUIELab-MDX-Net | 7.54 | 9 | 7.33 | 7.86 | 5.95 | N | KUIELab-MDX-Net: A Two-Stream Neural Network for Music Demixing | 2021 |
+| 7 | CDE-HTCN | 6.89 | 7.37 | 7.33 | 7.92 | 4.92 | N | Hierarchic Temporal Convolutional Network With Cross-Domain Encoder for Music Source Separation | 2022 |
+| 8 | Attentive-MultiResUNet | 6.81 | 8.57 | 7.63 | 5.88 | 5.14 | N | An Efficient Short-Time Discrete Cosine Transform and Attentive MultiResUNet Framework for Music Source Separation | 2022 |
+| 9 | DEMUCS (extra) | 6.79 | 7.29 | 7.58 | 7.6 | 4.69 | Y | Music Source Separation in the Waveform Domain | 2019 |
+| 10 | CWS-PResUNet | 6.77 | 8.92 | 6.38 | 5.93 | 5.84 | N | CWS-PResUNet: Music Source Separation with Channel-wise Subband Phase-aware ResUNet | 2021 |
+| 11 | D3Net | 6.68 | 7.8 | 7.36 | 6.2 | 5.37 | Y | D3Net: Densely connected multidilated DenseNet for music source separation | 2020 |
+| 12 | Conv-TasNet (extra) | 6.32 | 6.74 | 7.11 | 7 | | Y | Conv-TasNet: Surpassing Ideal Time-Frequency Magnitude Masking for Speech Separation | 2018 |
+| 13 | UMXL | 6.316 | 7.213 | 7.148 | 6.015 | 4.889 | Y | Open-Unmix - A Reference Implementation for Music Source Separation | 2021 |
+| 14 | DEMUCS | 6.28 | 6.84 | 6.86 | 7.01 | 4.42 | N | Music Source Separation in the Waveform Domain | 2019 |
+| 15 | TAK2 | 6.04 | 7.16 | 6.81 | 5.4 | 4.8 | Y | MMDenseLSTM: An efficient combination of convolutional and recurrent neural networks for audio source separation | 2018 |
+| 16 | D3Net | 6.01 | 7.24 | 7.01 | 5.25 | 4.53 | N | D3Net: Densely connected multidilated DenseNet for music source separation | 2021 |
+| 17 | Spleeter (MWF) | 5.91 | 6.86 | 6.71 | 5.51 | 4.02 | Y | Spleeter: A Fast And State-of-the Art Music Source Separation Tool With Pre-trained Models | 2019 |
+| 18 | LaSAFT+GPoCM | 5.88 | 7.33 | 5.68 | 5.63 | 4.87 | N | LaSAFT: Latent Source Attentive Frequency Transformation for Conditioned Source Separation | 2020 |
+| 19 | X-UMX | 5.79 | 6.61 | 6.47 | 5.43 | 4.64 | N | All for One and One for All: Improving Music Separation by Bridging Networks | 2020 |
+| 20 | Conv-TasNet | 5.73 | 6.81 | 6.08 | 5.66 | 4.37 | N | Conv-TasNet: Surpassing Ideal Time-Frequency Magnitude Masking for Speech Separation | 2018 |
+| 21 | Sams-Net | 5.65 | 6.61 | 6.63 | 5.25 | 4.09 | N | Sams-Net: A Sliced Attention-based Neural Network for Music Source Separation | 2019 |
+| 22 | Meta-TasNet | 5.52 | 6.4 | 5.91 | 5.58 | 4.19 | N | Meta-learning Extractors for Music Source Separation | 2020 |
+| 23 | UMX | 5.33 | 6.32 | 5.73 | 5.23 | 4.02 | N | Open-Unmix - A Reference Implementation for Music Source Separation | 2019 |
+| 24 | Wavenet | 3.5 | 3.46 | 4.6 | 2.49 | 0.54 | N | End-to-end music source separation: is it possible in the waveform domain? | 2018 |
+| 25 | STL2 | 3.23 | 3.25 | 4.22 | 3.21 | 2.25 | N | Wave-U-Net: A Multi-Scale Neural Network for End-to-End Audio Source Separation | 2018 |
+
+---
+
+<a name="architecture"/>
+
+## Architecture
+![architecture](images/architecture.png)
+
+---
+
+<a name="datasets"/>
+
+## Datasets
+The raw audio dataset is provided from [MUSDB18](https://paperswithcode.com/dataset/musdb18) and are organized into "vocals", "drums", "bass", and "other" stem files and "mixture" fully mixed track.
+
+---
+<a name="eda"/>
+
+## Exploratory Data Analysis (EDA)
+
+### Waveform
+- The waveform of the data shows the oscillations of pressure amplitude over time. This is effectively a "raw" format of audio data.
+- It is defined by the sampling frequency and bit depth.
+    - The sampling frequency refers to how many samples of audio are played back per second (i.e. 44.1kHz means that every second, 44,100 samples are played). This determines the upper bound of frequencies that can be represented by the audio signal.
+    - The bit depth refers to how precise the amplitude values are determining the dynamic range of an audio signal (i.e. 16-bit depth can represent 65,536 unique numbers, resulting in approx. 96dB of dynamic range)
+- To simplify, the sampling rate essentially controls the resolution of the x-axis and the bit depth controls the resolution of the y-axis
+- While it can often be hard to glean information by visually inspecting waveforms, you can see different characteristics in each different instrument's waveform.
+    - Vocals - Notice how the vocals have a more consistently full signal (likely holding notes until the dropoff in the last second).
+    - Bass - Notice how the bass appears to almost have "blocks" of waves at similar amplitudes (likely holding a singl note).
+    - Drums - Notice how the drums have many spikes in amplitude (potentially snare or bass drum hits).
+    - Other - Less can be gleaned from other, as it likely contains a mixture of other instruments. However, there does seem to be some amplitude fluctations that somewhat consistent to the bas signal.
+    - Mixture - Notice how the mixture is the fullest signal with the highest amplitude. Because all signals have been summed together, it is incredibly challenging to glean anything from this signal from visual inspection.
+- For further analysis, the signals need to be brought into the frequency domain.
+
+<div style="text-align:center;">
+  <img src="./images/waveforms.png" alt="waveforms" width="90%">
+</div>
+
+### Frequency Spectrum
+- The spectrum of a waveform shows the magnitude (in dB) of the signal per frequency.
+- Notice there is no time component here, rather the magnitude (dB) is with reference to frequencies of the entire audio signal (in this case 30 sec clip)
+- While the plot below shows the spectrum for the entire signal, we will be using this concept to take the spectrum of small pieces of the signal to reintroduce a time component when we create spectrograms next.
+
+<div style="text-align:center;">
+  <img src="./images/spectrums.png" alt="waveforms" width="90%">
+</div>
+
+### Spectrogram
+- A spectrogram is the combination of a waveform and spectrum plot, resulting in frequency magnitude (in dB) over time.
+- It has been scaled so that 0 dB is the maximum value.
+- Notice how patterns emerge in the light-green and yellow, looking like diagonal lines that move up and down. These patterns correspond to specific attributes of the music, such as melodies.
+
+<div style="text-align:center;">
+  <img src="./images/spectrograms.png" alt="waveforms" width="90%">
+</div>
+
+---
+
 <a name="dependencies"/>
 
-# Dependencies
+## Dependencies
 
 Python version - **3.10**.  
 To install dependencies, run:
@@ -48,12 +166,12 @@ To run inference on your file(s), firstly, you need to download checkpoints.
 
 Available checkpoints:
 
-| Target                                                                                       | Epoch | uSDR (hop=0.5) | cSDR (hop=0.5) |
-|----------------------------------------------------------------------------------------------|-------|----------------|----------------|
-| [Vocals](https://drive.google.com/file/d/1d4AV3sH7mhVed8L9ch5otXB0HzjCPnw0/view?usp=sharing) | 168   | 5.662 +- 2.248 | 5.414 +- 2.341 |
-| Bass                                                                                         | -     | -              | -              |
-| Drums                                                                                        | -     | -              | -              |
-| Other                                                                                        | -     | -              | -              |
+| Target | Epoch | uSDR | cSDR |
+|---|---|---|---|
+| Vocals | - | - | - |
+| Bass | - | - | - |
+| Drums | - | - | - |
+| Other | - | - | - |
 
 After you download the `.pt` file, put it into `./saved_models/{TARGET}/` directory.
 
@@ -86,7 +204,7 @@ and at this moment I've trained only (pretty bad) vocals extraction model.
 ---
 <a name="trainmodel"/>
 
-## Train your model
+## Model Training
 
 In this section, the model training pipeline is described.
 
@@ -207,6 +325,8 @@ The structure of this repository is as following:
 │   │   ├── __init__.py
 │   │   ├── bandsplitrnn.py         - file with the model itself
 │   │   └── pl_model.py             - file with Pytorch-Lightning Module for training and validation pipeline
+│   ├── notebooks                   - directory with notebooks for audio pre-processing
+│   │   └── *.py
 │   ├── utils                       - directory with utilities for evaluation and inference pipelines
 │   │   └── *.py                    
 │   ├── evaluate.py                 - script for evaluation pipeline 
@@ -216,6 +336,7 @@ The structure of this repository is as following:
 │   └── train.py                    - script for training pipeline
 ├── example                         - test example for inference.py
 │   └── *.wav
+├── images
 ├── .gitignore
 ├── README.md 
 └── requirement.txt

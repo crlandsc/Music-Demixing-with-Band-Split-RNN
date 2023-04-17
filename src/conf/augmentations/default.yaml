@@ -1,7 +1,7 @@
 randomcrop:
   _target_: data.augmentations.RandomCrop
-  p: 1.0
-  chunk_size_sec: 3
+  p: 1 # probability: originally was 1 (aka 100% of the time).
+  chunk_size_sec: 3 # must be <= (sad.default.window_size_in_sec / 2)
   sr: 44100
   window_stft: ${...featurizer.direct_transform.win_length}
   hop_stft: ${...featurizer.direct_transform.hop_length}

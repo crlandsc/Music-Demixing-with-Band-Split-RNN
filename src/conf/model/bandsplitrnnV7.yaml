@@ -12,7 +12,7 @@ fc_dim: 64 # 128
 rnn_dim: 128 # 256
 rnn_type: "LSTM"
 bidirectional: True
-num_layers: 1 #12
+num_layers: 1 #12 # number of layers in RNN module
 mlp_dim: 256 #512
 return_mask: False
 

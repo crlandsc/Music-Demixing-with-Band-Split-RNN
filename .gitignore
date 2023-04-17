@@ -2,6 +2,7 @@
 **/*logs/
 *.pyc
 **/*.ipynb
+ignore/
 
 inference_script.txt
 train_scripts.txt

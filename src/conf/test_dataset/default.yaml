@@ -3,7 +3,7 @@ target: ${..train_dataset.target}
 is_mono: False
 sr: 44100
 win_size: 3
-hop_size: 0.5
-batch_size: 8
+hop_size: 2.5 # 0.5 optimal according to paper. Must be < win_size
+batch_size: 4
 # window: 'hann'
 window: null

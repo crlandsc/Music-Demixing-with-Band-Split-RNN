@@ -134,6 +134,8 @@ class PLModel(pl.LightningModule):
             tgtT: torch.Tensor,
             delta: float = 1e-7
     ) -> torch.Tensor:
+        """Computest the Unweighted Signal to Distortion Ratio (USDR).
+        """
         num = torch.sum(torch.square(tgtT), dim=(1, 2))
         den = torch.sum(torch.square(tgtT - predT), dim=(1, 2))
         num += delta
