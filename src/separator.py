@@ -25,9 +25,9 @@ class Separator(nn.Module):
         self.model = self.initialize_modules()
 
         # audio params
-        self.sr = self.cfg.audio_params.sr
-        self.chunk_size = int(self.cfg.audio_params.win_size * self.sr)
-        self.chunk_step = int(self.cfg.audio_params.hop_size * self.sr)
+        self.sr = self.cfg.test_dataset.sr
+        self.chunk_size = int(self.cfg.test_dataset.win_size * self.sr)
+        self.chunk_step = int(self.cfg.test_dataset.hop_size * self.sr)
 
         # padding for chunk level (used to match stft and istft shapes)
         pad_chunk = self.model[0].win_length - self.chunk_size % self.model[0].hop_length
@@ -36,8 +36,8 @@ class Separator(nn.Module):
 
         # padding for overlap-add
         self.padding_whole = self.chunk_size - self.chunk_step
-        self.bs = self.cfg.audio_params.batch_size
-        window_name = self.cfg.audio_params.window
+        self.bs = self.cfg.test_dataset.batch_size
+        window_name = self.cfg.test_dataset.window
         if isinstance(window_name, str):
             self.window = getattr(torch, f'{window_name}_window')(self.ws)
         else:

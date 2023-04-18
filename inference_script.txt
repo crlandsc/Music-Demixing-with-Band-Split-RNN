@@ -1,6 +1,6 @@
 python3 inference.py\
-    --in-path ../example/test1/mixture_test1.wav\
-    --out-path ../example/test1/\
+    --in-path ../example/test2/mixture.wav\
+    --out-path ../example/test2/\
     --target vocals\
-    --ckpt-path saved_models/vocals/vocals.pt\
-    --device cpu
+    --ckpt-path saved_models/vocals/vocals.ckpt\
+    --device gpu

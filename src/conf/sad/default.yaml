@@ -1,6 +1,6 @@
 sr: 44100
 window_size_in_sec: 6 # 6 sec because random crop shortens audio to 3 sec
-overlap_ratio: 0.1 # 0.5 overlap ideal, but lower for faster training
+overlap_ratio: 0.5 # 0.5 overlap ideal, but lower for faster training
 n_chunks_per_segment: 10
 eps: 1e-5
 gamma: 1e-3

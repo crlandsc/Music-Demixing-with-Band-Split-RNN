@@ -209,6 +209,10 @@ def train(
         logger=logger,
         callbacks=callbacks,
     )
+    
+    # if cfg.chkp_path != None:
+    #     # Load pl checkpoint into model
+    #     plmodel = plmodel.load_from_checkpoint(cfg.chkp_path)
 
     log.info("Starting training...")
     try:
@@ -237,16 +241,24 @@ def train(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '-d',
-        '--device',
-        type=str,
-        required=False,
-        default='cpu',
-        help="Device name - either 'cuda', or 'cpu'."
-    )
-    args = vars(parser.parse_args())
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument(
+    #     '-d',
+    #     '--device',
+    #     type=str,
+    #     required=False,
+    #     default='cpu',
+    #     help="Device name - either 'cuda', or 'cpu'."
+    # )
+    # parser.add_argument(
+    #     '-c',
+    #     '--ckpt-path',
+    #     type=str,
+    #     required=False,
+    #     default=None,
+    #     help="Path to .ckpt file to train model from a checkpoint (including .ckpt extention)"
+    # )
+    # args = vars(parser.parse_args())
 
     # train(args['device'])
     train()

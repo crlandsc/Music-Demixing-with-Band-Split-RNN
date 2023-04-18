@@ -31,15 +31,15 @@ class InferenceProgram:
         # config params
         self.cfg_path = self.tgt_dir / 'hparams.yaml'
         self.cfg = OmegaConf.load(self.cfg_path)
-        self.cfg.audio_params['in_fp'] = in_path
-        self.cfg.audio_params['out_fp'] = out_path
+        self.cfg.test_dataset['in_fp'] = in_path
+        self.cfg.test_dataset['out_fp'] = out_path
 
         self.device = torch.device(
             'cuda' if torch.cuda.is_available() and device == 'cuda' else 'cpu'
         )
 
         # initialize the dataset
-        self.dataset = EvalSourceSeparationDataset(mode='inference', **self.cfg.audio_params)
+        self.dataset = EvalSourceSeparationDataset(mode='inference', **self.cfg.test_dataset)
 
         # initialize the separator
         self.sep = Separator(self.cfg, self.ckpt_path)

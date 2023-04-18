@@ -21,11 +21,21 @@ class EvaluateProgram:
     def __init__(
             self,
             run_dir: str,
+            ckpt: str,
             device: str = 'cuda'
+
     ):
         # paths
         self.cfg_path = Path(self.CFG_PATH.format(run_dir))
         self.ckpt_dir = Path(self.CKPT_DIR.format(run_dir))
+
+        # # path to checkpoint # need to fix!
+        # if ckpt_path is None:
+        # for ckpt_path in self.ckpt_dir.glob("*.ckpt")
+        ckpt_path = self.ckpt_dir / ckpt
+        if not ckpt_path.is_file():
+            raise ValueError("{ckpt} is missing. Please provide 'ckpt' name (including file extension).")
+        self.ckpt_path = ckpt_path
 
         # config params
         self.cfg = OmegaConf.load(self.cfg_path)
@@ -38,8 +48,8 @@ class EvaluateProgram:
         logger.info("Initializing the dataset...")
         self.dataset = EvalSourceSeparationDataset(mode='test', **self.cfg.test_dataset)
         logger.info("Initializing the separator...")
-        self.cfg['audio_params'] = self.cfg.test_dataset
-        self.sep = Separator(self.cfg, None)
+        self.cfg['test_dataset'] = self.cfg.test_dataset
+        self.sep = Separator(self.cfg, ckpt_path)
         _ = self.sep.eval()
         _ = self.sep.to(self.device)
 
@@ -63,11 +73,11 @@ class EvaluateProgram:
         return metrics
 
     def run(self) -> None:
-        # iterate over checkpoints
+        # iterate over checkpoints - NEED TO FIX
         for ckpt_path in self.ckpt_dir.glob("*.ckpt"):
             logger.info(f"Evaluating checkpoint - {ckpt_path.name}")
             state_dict = load_pl_state_dict(ckpt_path, device=self.DEVICE)
-            _ = self.sep.model[1].load_state_dict(state_dict, strict=True)
+            _ = self.sep.model[1].load_state_dict(state_dict, strict=True) # LOOK AT THIS LINE - NOT LOADING APPROPRIATELY
             metrics = self.run_one_ckpt()
             for m in metrics:
                 logger.info(
@@ -100,6 +110,13 @@ if __name__ == '__main__':
         default='cuda',
         help="Device name - either 'cuda', or 'cpu'."
     )
+    parser.add_argument(
+        '--ckpt',
+        type=str,
+        required=True,
+        help="Name of checkpoint for evaluation (include file extension)"
+    )
+
     args = parser.parse_args()
 
     logger = logging.getLogger(__name__)

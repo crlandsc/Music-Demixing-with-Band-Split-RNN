@@ -146,7 +146,7 @@ if __name__ == '__main__':
         "mlp_dim": 512,
         "return_mask": False,
     }
-    model = BandSplitRNN(**cfg)
+    model = BandSplitRNN(**cfg)._load_from_state_dict()
     _ = model.eval()
 
     with torch.no_grad():

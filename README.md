@@ -269,6 +269,11 @@ python train.py train_dataset.target=drums model=bandsplitrnndrums
 python train.py train_dataset.target=other
 ```
 
+To load the model from a checkpoint, in the script include:
+```
+ckpt_path=path/to/checkpoint.ckpt
+```
+
 After training is started, the logging folder will be created for a particular experiment with the following path:
 ```
 src/logs/bandsplitrnn/${now:%Y-%m-%d}_${now:%H-%M}/

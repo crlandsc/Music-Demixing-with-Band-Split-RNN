@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "evaluate",
+            "type": "python",
+            "cwd": "${workspaceRoot}/src",
+            "request": "launch",
+            "program": "evaluate.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-d=./logs/bandsplitrnn/2023-04-16_13-39",
+                "--device=cuda",
+                "--ckpt=epoch03-val_usdr-3.56.ckpt"
+            ]
+        },
+        {
             "name": "prepare_dataset",
             "type": "python",
             "cwd": "${workspaceRoot}/src",
@@ -15,8 +29,8 @@
             "args": [
                 "--input-dir=/home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18/",
                 "--output-dir=./files/",
-                "--subset=train", // train, test
-                "--split=train", // train, valid, or none
+                "--subset=test", // train, test
+                "--split=valid", // train, valid, or none
                 "--sad-cfg-path=./conf/sad/default.yaml",
                 "--target=vocals" // vocals, bass, drums, other
             ]
@@ -28,12 +42,13 @@
             "request": "launch",
             "program": "train.py",
             "console": "integratedTerminal",
-            "justMyCode": true
-            // "args": [
-            //     "--device=cpu"
-            // //     "train_dataset.target=bass ", // bass, drums, other
-            // //     "model=model" // bandsplitrnnbass, bandsplitrnndrums
-            // ]
+            "justMyCode": true,
+            "args": [
+                "ckpt_path=./logs/bandsplitrnn/2023-04-17_18-50/weights/epoch08-val_usdr-3.60.ckpt"
+                // "--device=cpu"
+            //     "train_dataset.target=bass ", // bass, drums, other
+            //     "model=model" // bandsplitrnnbass, bandsplitrnndrums
+            ]
         }
     ]
 }
