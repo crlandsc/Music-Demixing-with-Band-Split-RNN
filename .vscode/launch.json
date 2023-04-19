@@ -13,9 +13,9 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
-                "-d=./logs/bandsplitrnn/2023-04-16_13-39",
+                "-d=./logs/bandsplitrnn/2023-04-18_09-07",
                 "--device=cuda",
-                "--ckpt=epoch03-val_usdr-3.56.ckpt"
+                "--ckpt=epoch27-val_usdr1.63.ckpt"
             ]
         },
         {
@@ -44,7 +44,7 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
-                "ckpt_path=./logs/bandsplitrnn/2023-04-17_18-50/weights/epoch08-val_usdr-3.60.ckpt"
+                "ckpt_path=./logs/bandsplitrnn/2023-04-18_09-07/weights/epoch27-val_usdr1.63.ckpt"
                 // "--device=cpu"
             //     "train_dataset.target=bass ", // bass, drums, other
             //     "model=model" // bandsplitrnnbass, bandsplitrnndrums

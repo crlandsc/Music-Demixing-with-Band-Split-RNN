@@ -1,0 +1,173 @@
+model:
+  sr: 44100
+  n_fft: 2048
+  bandsplits:
+  - - 1000
+    - 100
+  - - 4000
+    - 250
+  - - 8000
+    - 500
+  - - 16000
+    - 1000
+  - - 20000
+    - 2000
+  bottleneck_layer: rnn
+  t_timesteps: 263
+  fc_dim: 28
+  rnn_dim: 56
+  rnn_type: LSTM
+  bidirectional: true
+  num_layers: 5
+  mlp_dim: 112
+  return_mask: false
+  complex_as_channel: true
+  is_mono: false
+train_dataset:
+  file_dir: /home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18
+  txt_dir: files/
+  txt_path: null
+  target: vocals
+  is_training: true
+  is_mono: false
+  sr: 44100
+  preload_dataset: false
+  silent_prob: 0.1
+  mix_prob: 0.25
+  mix_tgt_too: false
+val_dataset:
+  file_dir: /home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18
+  txt_dir: files/
+  txt_path: null
+  target: vocals
+  is_training: false
+  is_mono: false
+  sr: 44100
+test_dataset:
+  in_fp: /home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18
+  target: vocals
+  is_mono: false
+  sr: 44100
+  win_size: 3
+  hop_size: 0.5
+  batch_size: 4
+  window: null
+sad:
+  sr: 44100
+  window_size_in_sec: 6
+  overlap_ratio: 0.5
+  n_chunks_per_segment: 10
+  eps: 1.0e-05
+  gamma: 0.001
+  threshold_max_quantile: 0.15
+  threshold_segment: 0.5
+augmentations:
+  randomcrop:
+    _target_: data.augmentations.RandomCrop
+    p: 1
+    chunk_size_sec: 3
+    sr: 44100
+    window_stft: 2048
+    hop_stft: 512
+  gainscale:
+    _target_: data.augmentations.GainScale
+    p: 0.5
+    min_db: -10.0
+    max_db: 10.0
+featurizer:
+  direct_transform:
+    _target_: torchaudio.transforms.Spectrogram
+    n_fft: 2048
+    win_length: 2048
+    hop_length: 512
+    power: null
+  inverse_transform:
+    _target_: torchaudio.transforms.InverseSpectrogram
+    n_fft: 2048
+    win_length: 2048
+    hop_length: 512
+callbacks:
+  lr_monitor:
+    _target_: pytorch_lightning.callbacks.LearningRateMonitor
+    logging_interval: epoch
+  model_ckpt:
+    _target_: pytorch_lightning.callbacks.ModelCheckpoint
+    monitor: val/loss
+    mode: min
+    save_top_k: 4
+    dirpath: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-18_09-07/weights
+    filename: epoch{epoch:02d}-val_loss{val/loss:.2f}
+    auto_insert_metric_name: false
+  model_ckpt_usdr:
+    _target_: pytorch_lightning.callbacks.ModelCheckpoint
+    monitor: val/usdr
+    mode: max
+    save_top_k: 4
+    dirpath: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-18_09-07/weights
+    filename: epoch{epoch:02d}-val_usdr{val/usdr:.2f}
+    auto_insert_metric_name: false
+  early_stop:
+    _target_: pytorch_lightning.callbacks.EarlyStopping
+    monitor: val/loss
+    mode: min
+    patience: 10
+    min_delta: 0.0001
+  ema:
+    _target_: utils.callbacks.EMA
+    decay: 0.9999
+    validate_original_weights: false
+    every_n_steps: 1
+logger:
+  tensorboard:
+    _target_: pytorch_lightning.loggers.TensorBoardLogger
+    save_dir: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-18_09-07/tb_logs
+    name: ''
+    version: ''
+    log_graph: false
+    default_hp_metric: false
+    prefix: ''
+  wandb:
+    _target_: pytorch_lightning.loggers.WandbLogger
+    project: mdx_vocals
+    name: mdx_vocals
+    save_dir: wandb_logs
+    offline: false
+    id: null
+    log_model: false
+    prefix: ''
+    job_type: train
+    group: ''
+    tags: []
+train_loader:
+  batch_size: 4
+  num_workers: 4
+  shuffle: true
+  drop_last: true
+val_loader:
+  batch_size: 4
+  num_workers: 4
+  shuffle: false
+  drop_last: false
+opt:
+  _target_: torch.optim.Adam
+  lr: 0.001
+sch:
+  warmup_step: 10
+  alpha: 0.1
+  gamma: 0.98
+ckpt_path: ./logs/bandsplitrnn/2023-04-17_18-50/weights/epoch08-val_usdr-3.60.ckpt
+trainer:
+  fast_dev_run: false
+  max_epochs: 500
+  check_val_every_n_epoch: 1
+  num_sanity_val_steps: 5
+  log_every_n_steps: 10
+  accelerator: gpu
+  devices: 1
+  gradient_clip_val: 5
+  precision: 16
+  enable_progress_bar: true
+  benchmark: true
+  deterministic: false
+experiment_dirname: bandsplitrnn
+wandb_api_key: d5c4447e39b2b10b95f05f907d57845ded16bc13

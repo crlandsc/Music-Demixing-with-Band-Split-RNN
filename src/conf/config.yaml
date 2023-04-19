@@ -57,7 +57,7 @@ trainer:
   accelerator: gpu # "auto", gpu
   devices: 1 # can increase devices with more gpus available
   gradient_clip_val: 5
-  precision: 16 # 16 for lower memory load, 32 for better accuracy
+  precision: 32 # 16 for lower memory load, 32 for better accuracy
   enable_progress_bar: True
   benchmark: True
   deterministic: False

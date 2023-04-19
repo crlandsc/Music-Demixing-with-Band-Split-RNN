@@ -1,6 +1,6 @@
 python3 inference.py\
-    --in-path ../example/test2/mixture.wav\
-    --out-path ../example/test2/\
+    --in-path ../example/test3-usdr1.63/mixture.wav\
+    --out-path ../example/test3-usdr1.63/\
     --target vocals\
-    --ckpt-path saved_models/vocals/vocals.ckpt\
+    --ckpt-path saved_models/vocals/epoch27-val_loss0.47.ckpt\
     --device gpu
