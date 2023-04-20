@@ -44,7 +44,7 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
-                "ckpt_path=./logs/bandsplitrnn/2023-04-18_09-07/weights/epoch27-val_usdr1.63.ckpt"
+                "ckpt_path=./logs/bandsplitrnn/2023-04-19_11-26/weights/epoch29-val_usdr1.85.ckpt"
                 // "--device=cpu"
             //     "train_dataset.target=bass ", // bass, drums, other
             //     "model=model" // bandsplitrnnbass, bandsplitrnndrums

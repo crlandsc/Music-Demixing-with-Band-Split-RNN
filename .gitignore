@@ -4,6 +4,7 @@
 **/*.ipynb
 ignore/
 aws/
+datasets/
 
 inference_script.txt
 train_scripts.txt
