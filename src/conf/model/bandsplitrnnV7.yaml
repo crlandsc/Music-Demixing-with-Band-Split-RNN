@@ -7,7 +7,7 @@ bandsplits:
   - [16000, 1000]
   - [20000, 2000]
 bottleneck_layer: "rnn"
-t_timesteps: 512 # 263 # time steps for normalization?
+t_timesteps: 263 # time steps for normalization?
 fc_dim: 128 # 64 # 128
 rnn_dim: 256 # 128 # 256
 rnn_type: "LSTM"
