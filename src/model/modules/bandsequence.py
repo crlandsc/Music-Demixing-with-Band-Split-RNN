@@ -96,7 +96,7 @@ if __name__ == '__main__':
     in_features = torch.rand(batch_size, k_subbands, t_timesteps, input_dim).to(device)
 
     cfg = {
-        "t_timesteps": t_timesteps,
+        # "t_timesteps": t_timesteps,
         "input_dim_size": 128,
         "hidden_dim_size": 256,
         "rnn_type": "LSTM",

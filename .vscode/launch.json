@@ -27,9 +27,9 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
-                "--input-dir=/home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18/",
+                "--input-dir=/home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18_combined/",
                 "--output-dir=./files/",
-                "--subset=test", // train, test
+                "--subset=train", // train, test
                 "--split=valid", // train, valid, or none
                 "--sad-cfg-path=./conf/sad/default.yaml",
                 "--target=vocals" // vocals, bass, drums, other

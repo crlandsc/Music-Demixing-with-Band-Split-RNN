@@ -70,7 +70,7 @@ class BandSplitModule(nn.Module):
 
 
 if __name__ == '__main__':
-    batch_size, n_channels, freq, time = 4, 2, 1025, 259
+    batch_size, n_channels, freq, time = 2, 2, 1025, 259
     is_complex = True
     if is_complex:
         in_features = torch.rand(batch_size, n_channels, freq, time, dtype=torch.cfloat)

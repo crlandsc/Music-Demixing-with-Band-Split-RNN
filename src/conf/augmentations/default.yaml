@@ -8,7 +8,7 @@ randomcrop:
 
 gainscale:
   _target_: data.augmentations.GainScale
-  p: 0.5
+  p: 0.1
   min_db: -10.
   max_db: 10.
 

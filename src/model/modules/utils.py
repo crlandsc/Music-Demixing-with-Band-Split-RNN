@@ -60,6 +60,10 @@ if __name__ == '__main__':
 
     out = freq2bands(freqs_splits, sr, n_fft)
 
-    assert sum(out) == n_fft // 2 + 1
+    sum_tuples = 0
+    for tup in out:
+        sum_tuples += tup[1]
+
+    assert sum_tuples == n_fft // 2 + 1
 
     print(f"Input:\n{freqs_splits}\n{sr}\n{n_fft}\nOutput:{out}")
