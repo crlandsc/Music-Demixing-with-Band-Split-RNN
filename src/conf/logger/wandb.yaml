@@ -2,8 +2,8 @@
 
 wandb:
   _target_: pytorch_lightning.loggers.WandbLogger
-  project: MDX_BSRNN_${train_dataset.target}
-  name: MDX_BSRNN_${train_dataset.target}
+  project: MDX_BSRNN_23
+  name: ${train_dataset.target}
   save_dir: "wandb_logs"
   offline: False # set True to store all logs only locally
   id: null # pass correct id to resume experiment!

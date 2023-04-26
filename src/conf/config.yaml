@@ -2,7 +2,7 @@
 defaults:
   - model: bandsplitrnnV7
   - train_dataset: default
-  - val_dataset: default
+  # - val_dataset: default
   - test_dataset: default
   - sad: default
   - augmentations: default
@@ -17,11 +17,11 @@ train_loader:
   num_workers: 12 # set to same number as CPU cores
   shuffle: True
   drop_last: True
-val_loader: None
-  # batch_size: 2 # 2
-  # num_workers: 8
-  # shuffle: False
-  # drop_last: False
+val_loader:
+  batch_size: 2 # 2
+  num_workers: 8
+  shuffle: False
+  drop_last: False
 
 # optimization
 opt:
@@ -57,9 +57,9 @@ trainer:
   fast_dev_run: False
   min_epochs: 100 # optional (included early stopping callback)
   max_epochs: 500
-  val_check_interval: 0 # 1 for 
-  check_val_every_n_epoch: None # 1
-  num_sanity_val_steps: 0 # 5 # 0 for no val data
+  # val_check_interval: 1
+  # check_val_every_n_epoch: 1
+  # num_sanity_val_steps: 5 # 0 for no val data
   log_every_n_steps: 10 # 100
   accelerator: auto # "auto", gpu
   devices: auto # can increase devices with more gpus available

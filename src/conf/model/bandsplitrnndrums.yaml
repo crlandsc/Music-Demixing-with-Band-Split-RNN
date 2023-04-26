@@ -7,7 +7,7 @@ bandsplits:
   - [8000, 500]
   - [16000, 1000]
 bottleneck_layer: "rnn"
-t_timesteps: 512
+t_timesteps: 263 # 512
 fc_dim: 128
 rnn_dim: 256
 rnn_type: "LSTM"
