@@ -6,6 +6,7 @@ ignore/
 aws/
 datasets/
 wandb/
+.vscode/
 
 inference_script.txt
 train_scripts.txt
