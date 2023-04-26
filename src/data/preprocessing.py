@@ -40,11 +40,13 @@ class SAD:
 
     @staticmethod
     def calculate_rms(y: torch.Tensor):
+        """Calculates torch tensor rms from audio signal
+        RMS = sqrt(1/N * sum(x^2))
         """
-        """
-        y = torch.mean(torch.abs(y), dim=-1, keepdim=True)
-        y = torch.sqrt(y)
-        return y
+        y_squared = torch.pow(y, 2) # need to square signal before mean and sqrt
+        y_mean = torch.mean(torch.abs(y_squared), dim=-1, keepdim=True)
+        y_rms = torch.sqrt(y_mean)
+        return y_rms
 
     def calculate_thresholds(self, rms: torch.Tensor):
         """
@@ -112,9 +114,9 @@ if __name__ == "__main__":
     import torchaudio
 
     sr = 44100
-    example_path = 'example/example.mp3'
+    example_path = 'example/SAD/vocals.wav'
 
     sad = SAD(sr=sr)
     y, sr = torchaudio.load(example_path)
     y_salience = sad(y)
-    print(f"Initial shape: {y.shape}.\nShape after source activity detection: {y_salience.shape}")
+    print(f"Initial shape: ({y[0].shape}, {y[1].shape}).\nShape after source activity detection: ({y_salience[0].shape}, {y_salience[1].shape})")

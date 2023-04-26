@@ -13,32 +13,37 @@ defaults:
 
 # data
 train_loader:
-  batch_size: 2 # 2
-  num_workers: 8
+  batch_size: 8 # 2
+  num_workers: 12 # set to same number as CPU cores
   shuffle: True
   drop_last: True
-val_loader:
-  batch_size: 2 # 2
-  num_workers: 8
-  shuffle: False
-  drop_last: False
+val_loader: None
+  # batch_size: 2 # 2
+  # num_workers: 8
+  # shuffle: False
+  # drop_last: False
 
 # optimization
 opt:
   _target_: torch.optim.Adam
   lr: 1e-3
+
+# Scheduler options:
+# StepLR (torch.optim.lr_scheduler.StepLR)
 # sch:
 #   _target_: torch.optim.lr_scheduler.StepLR
 #   step_size: 2
 #   gamma: 0.98
 
-# torch.optim.lr_scheduler.LambdaLR
+# LambdaLR (torch.optim.lr_scheduler.LambdaLR):
+# allows for the incorporation of a warmup step
 sch:
     warmup_step: 10
-    alpha: 0.1
-    gamma: 0.98
+    alpha: 1 # warmup alpha for exponential warmup (to the power of the warmup step), originally 0.1
+    gamma: 0.9899494936611665 # (aka sqrt(0.98) -> the same as decaying 0.98 every 2 epochs rather than 1, per the paper)
 
 ckpt_path: null
+# enable_validation: False # True/False to enable validation
 
 # Remove when fully integrated
 # logger:
@@ -50,13 +55,15 @@ ckpt_path: null
 
 trainer:
   fast_dev_run: False
+  min_epochs: 100 # optional (included early stopping callback)
   max_epochs: 500
-  check_val_every_n_epoch: 1
-  num_sanity_val_steps: 5 # 5
+  val_check_interval: 0 # 1 for 
+  check_val_every_n_epoch: None # 1
+  num_sanity_val_steps: 0 # 5 # 0 for no val data
   log_every_n_steps: 10 # 100
-  accelerator: gpu # "auto", gpu
-  devices: 1 # can increase devices with more gpus available
-  gradient_clip_val: 5
+  accelerator: auto # "auto", gpu
+  devices: auto # can increase devices with more gpus available
+  gradient_clip_val: 5 # gradient clipping by a maximum gradient norm of 5 per the paper
   precision: 32 # 16 for lower memory load, 32 for better accuracy
   enable_progress_bar: True
   benchmark: True

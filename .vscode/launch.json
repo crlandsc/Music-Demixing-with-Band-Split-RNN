@@ -27,12 +27,12 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
-                "--input-dir=/home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18_combined/",
+                "--input-dir=/home/crlandsc/external/I/MDX-23/A_Label_Noise_Processed/Other/", // /home/crlandsc/Music-Demixing-with-Band-Split-RNN/example/SAD/",
                 "--output-dir=./files/",
                 "--subset=train", // train, test
-                "--split=valid", // train, valid, or none
+                "--split=none", // train, valid, or none
                 "--sad-cfg-path=./conf/sad/default.yaml",
-                "--target=vocals" // vocals, bass, drums, other
+                "--target=other" // vocals, bass, drums, other
             ]
         },
         {
@@ -43,12 +43,12 @@
             "program": "train.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": [
-                "ckpt_path=./logs/bandsplitrnn/2023-04-19_11-26/weights/epoch29-val_usdr1.85.ckpt"
+            // "args": [
+            //     "ckpt_path=./logs/bandsplitrnn/2023-04-19_11-26/weights/epoch29-val_usdr1.85.ckpt"
                 // "--device=cpu"
             //     "train_dataset.target=bass ", // bass, drums, other
             //     "model=model" // bandsplitrnnbass, bandsplitrnndrums
-            ]
+            // ]
         }
     ]
 }

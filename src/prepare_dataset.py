@@ -14,35 +14,35 @@ parser.add_argument(
     '--input-dir',
     type=str,
     required=True,
-    help="Path to directory with musdb18 dataset"
+    help="Path to directory with music dataset."
 )
 parser.add_argument(
     '-o',
     '--output-dir',
     type=str,
     required=True,
-    help="Path to directory where output .txt file is saved"
+    help="Path to directory where output .txt file is saved."
 )
 parser.add_argument(
     '--subset',
     type=str,
     required=False,
     default='train',
-    help="Train/test subset of dataset to process"
+    help="Subset (train, test) of dataset to process."
 )
 parser.add_argument(
     '--split',
     type=str,
     required=False,
     default='train',
-    help="Train/valid split of train dataset. Used if subset=train"
+    help="Split (train, valid, none) of train dataset. Used if subset=train. None for no split."
 )
 parser.add_argument(
     '--sad-cfg-path',
     type=str,
     required=False,
     default="./conf/sad/cropgainmix.yaml",
-    help="Path to Source Activity Detection config file"
+    help="Path to Source Activity Detection config file."
 )
 parser.add_argument(
     '-t',
@@ -50,7 +50,7 @@ parser.add_argument(
     nargs='+',
     required=False,
     default=["vocals"],
-    help="Target source. SAD will save salient fragments of vocal audio."
+    help="Target source (vocals, bass, drums, other). SAD will save salient fragments of vocal audio."
 )
 args = parser.parse_args()
 
@@ -84,7 +84,10 @@ def run_program(
                 track.targets[target].audio.T,
                 dtype=torch.float32
             )
-            # find indices of salient segments
+            y = torch.tensor(
+                track.targets[target].audio.T,
+                dtype=torch.float32
+            )            # find indices of salient segments
             indices = sad.calculate_salient_indices(y)
             # write to file
             for line in prepare_save_line(track.name, indices, sad.window_size):

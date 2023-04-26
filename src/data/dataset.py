@@ -76,6 +76,8 @@ class SourceSeparationDataset(Dataset):
             file_path: str,
             indices: tp.Tuple[int, int]
     ) -> torch.Tensor:
+        """Load a single audio file.
+        """
         assert Path(file_path).is_file(), f"There is no such file - {file_path}."
 
         offset = indices[0]
@@ -94,12 +96,16 @@ class SourceSeparationDataset(Dataset):
     def load_files(
             self, fp_template: str, indices: tp.Tuple[int, int],
     ) -> tp.Tuple[torch.Tensor, torch.Tensor]:
+        """Load audio files for target and mixture and then normalize.
+        """
         mix_segment = self.load_file(
             fp_template.format('mixture'), indices
         )
         tgt_segment = self.load_file(
             fp_template.format(self.target), indices
         )
+
+        # Normalize mixture and target
         max_norm = max(
             mix_segment.abs().max(), tgt_segment.abs().max()
         )
@@ -114,6 +120,8 @@ class SourceSeparationDataset(Dataset):
             mix_segment: torch.Tensor,
             tgt_segment: torch.Tensor
     ) -> tp.Tuple[torch.Tensor, torch.Tensor]:
+        """Returns mixture without target and a tensor of zeros the same length as the target (silent segment)
+        """
         return (
             mix_segment - tgt_segment,
             torch.zeros_like(tgt_segment)
