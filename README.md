@@ -11,7 +11,7 @@ The repository has been modified from [Amantur Amatov](https://github.com/amante
 #### "Label Noise" Competition Results:
 <div style="text-align:center">
   <a href="https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/leaderboards?challenge_leaderboard_extra_id=1286&challenge_round_id=1278">
-    <img src="./images/competition_results.png" alt="competition results" width="90%">
+    <img src="./images/competition_results.png" alt="competition results" width="70%">
   </a>
 </div>
 
