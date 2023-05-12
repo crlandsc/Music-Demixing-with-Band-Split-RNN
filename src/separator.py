@@ -84,16 +84,20 @@ class Separator(nn.Module):
     def separate(self, y: torch.Tensor) -> torch.Tensor:
         n_chunks = y.shape[0]
         window = self.window.to(y) if self.window is not None else None
+        window_name = self.cfg.test_dataset.window
 
         chunks = []
         for s, e in get_minibatch(n_chunks, self.bs):
             # apply the model
             chunk = self.model(y[s:e])
 
-            if window is None:
+            if window_name is None:
                 chunk /= (self.ws / self.hs)
-            else:
-                chunk = chunk * window
+            elif window_name == 'hann':
+                chunk = chunk * window * 2 # multiply by 2 for hanning amplitude correction
+                chunk /= (self.ws / self.hs)
+            else: # need to implement other windows
+                chunk /= (self.ws / self.hs)
 
             chunks.append(chunk)
 

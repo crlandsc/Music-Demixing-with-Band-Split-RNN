@@ -48,6 +48,12 @@ class SAD:
         y_rms = torch.sqrt(y_mean)
         return y_rms
 
+        # # Version from `augmentations.py`
+        # return torch.sqrt(
+        #     torch.mean(torch.square(y), dim=-1, keepdim=keepdim)
+        # )
+
+
     def calculate_thresholds(self, rms: torch.Tensor):
         """
         """

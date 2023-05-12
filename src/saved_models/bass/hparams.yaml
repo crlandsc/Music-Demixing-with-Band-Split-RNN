@@ -2,32 +2,32 @@ model:
   sr: 44100
   n_fft: 2048
   bandsplits:
+  - - 500
+    - 50
   - - 1000
     - 100
   - - 4000
-    - 250
-  - - 8000
     - 500
-  - - 16000
+  - - 8000
     - 1000
-  - - 20000
+  - - 16000
     - 2000
   bottleneck_layer: rnn
   t_timesteps: 263
-  fc_dim: 28
-  rnn_dim: 56
+  fc_dim: 128
+  rnn_dim: 256
   rnn_type: LSTM
   bidirectional: true
-  num_layers: 5
-  mlp_dim: 112
+  num_layers: 12
+  mlp_dim: 512
   return_mask: false
   complex_as_channel: true
   is_mono: false
 train_dataset:
-  file_dir: /home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18
+  file_dir: /home/clandschoot_kirkegaard/Music-Demixing-with-Band-Split-RNN/datasets/Bass
   txt_dir: files/
   txt_path: null
-  target: vocals
+  target: bass
   is_training: true
   is_mono: false
   sr: 44100
@@ -35,17 +35,9 @@ train_dataset:
   silent_prob: 0.1
   mix_prob: 0.25
   mix_tgt_too: false
-val_dataset:
-  file_dir: /home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18
-  txt_dir: files/
-  txt_path: null
-  target: vocals
-  is_training: false
-  is_mono: false
-  sr: 44100
 test_dataset:
-  in_fp: /home/crlandsc/external/I/MDX-23/C_Standard/MUSDB18
-  target: vocals
+  in_fp: /home/clandschoot_kirkegaard/Music-Demixing-with-Band-Split-RNN/datasets/Bass
+  target: bass
   is_mono: false
   sr: 44100
   win_size: 3
@@ -92,26 +84,20 @@ callbacks:
     logging_interval: epoch
   model_ckpt:
     _target_: pytorch_lightning.callbacks.ModelCheckpoint
-    monitor: val/loss
+    monitor: train/loss
     mode: min
-    save_top_k: 4
-    dirpath: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-18_09-07/weights
-    filename: epoch{epoch:02d}-val_loss{val/loss:.2f}
+    save_top_k: 5
+    dirpath: /home/clandschoot_kirkegaard/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-29_14-45/weights
+    filename: epoch{epoch:02d}-train_loss{train/loss:.2f}
     auto_insert_metric_name: false
   model_ckpt_usdr:
     _target_: pytorch_lightning.callbacks.ModelCheckpoint
-    monitor: val/usdr
+    monitor: train/usdr
     mode: max
-    save_top_k: 4
-    dirpath: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-18_09-07/weights
-    filename: epoch{epoch:02d}-val_usdr{val/usdr:.2f}
+    save_top_k: 5
+    dirpath: /home/clandschoot_kirkegaard/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-29_14-45/weights
+    filename: epoch{epoch:02d}-train_usdr{train/usdr:.2f}
     auto_insert_metric_name: false
-  early_stop:
-    _target_: pytorch_lightning.callbacks.EarlyStopping
-    monitor: val/loss
-    mode: min
-    patience: 10
-    min_delta: 0.0001
   ema:
     _target_: utils.callbacks.EMA
     decay: 0.9999
@@ -120,7 +106,7 @@ callbacks:
 logger:
   tensorboard:
     _target_: pytorch_lightning.loggers.TensorBoardLogger
-    save_dir: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-18_09-07/tb_logs
+    save_dir: /home/clandschoot_kirkegaard/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-29_14-45/tb_logs
     name: ''
     version: ''
     log_graph: false
@@ -128,8 +114,8 @@ logger:
     prefix: ''
   wandb:
     _target_: pytorch_lightning.loggers.WandbLogger
-    project: mdx_vocals
-    name: mdx_vocals
+    project: MDX_BSRNN_23
+    name: bass
     save_dir: wandb_logs
     offline: false
     id: null
@@ -139,13 +125,13 @@ logger:
     group: ''
     tags: []
 train_loader:
-  batch_size: 4
-  num_workers: 4
+  batch_size: 8
+  num_workers: 12
   shuffle: true
   drop_last: true
 val_loader:
-  batch_size: 4
-  num_workers: 4
+  batch_size: 2
+  num_workers: 8
   shuffle: false
   drop_last: false
 opt:
@@ -154,18 +140,17 @@ opt:
 sch:
   warmup_step: 10
   alpha: 0.1
-  gamma: 0.98
-ckpt_path: ./logs/bandsplitrnn/2023-04-17_18-50/weights/epoch08-val_usdr-3.60.ckpt
+  gamma: 0.9899494936611665
+ckpt_path: logs/bandsplitrnn/2023-04-28_23-46/weights/epoch287-train_usdr8.16.ckpt
 trainer:
   fast_dev_run: false
+  min_epochs: 100
   max_epochs: 500
-  check_val_every_n_epoch: 1
-  num_sanity_val_steps: 5
   log_every_n_steps: 10
-  accelerator: gpu
-  devices: 1
+  accelerator: auto
+  devices: auto
   gradient_clip_val: 5
-  precision: 16
+  precision: 32
   enable_progress_bar: true
   benchmark: true
   deterministic: false

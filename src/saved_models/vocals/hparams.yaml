@@ -24,7 +24,7 @@ model:
   complex_as_channel: true
   is_mono: false
 train_dataset:
-  file_dir: /home/christopherlandschoot/Music-Demixing-with-Band-Split-RNN/datasets/MUSDB18
+  file_dir: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/datasets/Vocals
   txt_dir: files/
   txt_path: null
   target: vocals
@@ -35,16 +35,8 @@ train_dataset:
   silent_prob: 0.1
   mix_prob: 0.25
   mix_tgt_too: false
-val_dataset:
-  file_dir: /home/christopherlandschoot/Music-Demixing-with-Band-Split-RNN/datasets/MUSDB18
-  txt_dir: files/
-  txt_path: null
-  target: vocals
-  is_training: false
-  is_mono: false
-  sr: 44100
 test_dataset:
-  in_fp: /home/christopherlandschoot/Music-Demixing-with-Band-Split-RNN/datasets/MUSDB18
+  in_fp: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/datasets/Vocals
   target: vocals
   is_mono: false
   sr: 44100
@@ -71,7 +63,7 @@ augmentations:
     hop_stft: 512
   gainscale:
     _target_: data.augmentations.GainScale
-    p: 0.1
+    p: 0.5
     min_db: -10.0
     max_db: 10.0
 featurizer:
@@ -92,26 +84,20 @@ callbacks:
     logging_interval: epoch
   model_ckpt:
     _target_: pytorch_lightning.callbacks.ModelCheckpoint
-    monitor: val/loss
+    monitor: train/loss
     mode: min
-    save_top_k: 5
-    dirpath: /home/christopherlandschoot/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-24_12-45/weights
-    filename: epoch{epoch:02d}-val_loss{val/loss:.2f}
+    save_top_k: 4
+    dirpath: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-28_17-51/weights
+    filename: epoch{epoch:02d}-train_loss{train/loss:.2f}
     auto_insert_metric_name: false
   model_ckpt_usdr:
     _target_: pytorch_lightning.callbacks.ModelCheckpoint
-    monitor: val/usdr
+    monitor: train/usdr
     mode: max
-    save_top_k: 5
-    dirpath: /home/christopherlandschoot/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-24_12-45/weights
-    filename: epoch{epoch:02d}-val_usdr{val/usdr:.2f}
+    save_top_k: 4
+    dirpath: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-28_17-51/weights
+    filename: epoch{epoch:02d}-train_usdr{train/usdr:.2f}
     auto_insert_metric_name: false
-  early_stop:
-    _target_: pytorch_lightning.callbacks.EarlyStopping
-    monitor: val/loss
-    mode: min
-    patience: 10
-    min_delta: 0.0001
   ema:
     _target_: utils.callbacks.EMA
     decay: 0.9999
@@ -120,7 +106,7 @@ callbacks:
 logger:
   tensorboard:
     _target_: pytorch_lightning.loggers.TensorBoardLogger
-    save_dir: /home/christopherlandschoot/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-24_12-45/tb_logs
+    save_dir: /home/crlandsc/Music-Demixing-with-Band-Split-RNN/src/logs/bandsplitrnn/2023-04-28_17-51/tb_logs
     name: ''
     version: ''
     log_graph: false
@@ -128,8 +114,8 @@ logger:
     prefix: ''
   wandb:
     _target_: pytorch_lightning.loggers.WandbLogger
-    project: mdx_vocals
-    name: mdx_vocals
+    project: MDX_BSRNN_23
+    name: vocals
     save_dir: wandb_logs
     offline: false
     id: null
@@ -140,11 +126,11 @@ logger:
     tags: []
 train_loader:
   batch_size: 8
-  num_workers: 8
+  num_workers: 12
   shuffle: true
   drop_last: true
 val_loader:
-  batch_size: 8
+  batch_size: 2
   num_workers: 8
   shuffle: false
   drop_last: false
@@ -155,15 +141,14 @@ sch:
   warmup_step: 10
   alpha: 0.1
   gamma: 0.9899494936611665
-ckpt_path: logs/bandsplitrnn/2023-04-24_02-15/weights/epoch30-val_usdr3.52.ckpt
+ckpt_path: logs/bandsplitrnn/2023-04-28_14-12/weights/epoch217-train_usdr7.07.ckpt
 trainer:
   fast_dev_run: false
+  min_epochs: 100
   max_epochs: 500
-  check_val_every_n_epoch: 1
-  num_sanity_val_steps: 5
   log_every_n_steps: 10
-  accelerator: gpu
-  devices: 1
+  accelerator: auto
+  devices: auto
   gradient_clip_val: 5
   precision: 32
   enable_progress_bar: true
