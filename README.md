@@ -3,12 +3,20 @@
 </div>
 
 <h1 style="text-align:center">
-    Music "Demixing" with Band Split Recurrent Neural Network
+    Music "Demixing" with Band-Split Recurrent Neural Network
 </h1>
 
-The repository has been modified from [Amantur](https://github.com/amanteur/BandSplitRNN-Pytorch) and is an unofficial PyTorch implementation of the paper [Music Source Separation with Band-split RNN](https://arxiv.org/pdf/2209.15174.pdf). Huge thank you to both for promoting this work!
+The repository has been modified from [Amantur Amatov](https://github.com/amanteur/BandSplitRNN-Pytorch) and is an unofficial PyTorch implementation of the 2022 paper [Music Source Separation with Band-split RNN](https://arxiv.org/pdf/2209.15174.pdf) with some additional modifications to compete in the [Sound Demixing Challenge (2023)]([https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23) - ["Label Noise" Track](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/leaderboards?challenge_leaderboard_extra_id=1286&challenge_round_id=1278). Huge thank you to both for developing and promoting this work!
+
+#### "Label Noise" Competition Results:
+<div style="text-align:center">
+  <a href="https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/leaderboards?challenge_leaderboard_extra_id=1286&challenge_round_id=1278">
+    <img src="./images/competition_results.png" alt="competition results" width="90%">
+  </a>
+</div>
 
 ---
+
 ## Table of Contents
 
 1. [Problem Statement](#problem-statement)
@@ -30,7 +38,7 @@ The repository has been modified from [Amantur](https://github.com/amanteur/Band
 <a name="problem-statement"/>
 
 ## Problem Statement
-Audio source separation has been a topic of interest for quite some time, but has gained increasing attention recently due an increase in computing power and the capabilities of neural networks. Source separation can be implemented to improve speech clarity in particularly noisy environment or, in our case, separate individual instruments from a song. There are many use cases for this technology, like music remixing, music information retrieval, and music education. This work seeks to review and improve upon current methods of audio source separation.
+Audio source separation has been a topic of interest for quite some time, but has gained increasing attention recently due an increase in computing power and the capabilities of neural networks. Source separation can be implemented for a number of purposes, including to improve speech clarity in noisy environment or, in our case, separate individual instruments from a song. There are many use cases for this technology, like music remixing, music information retrieval, and music education. This work seeks to review and improve upon current methods of audio source separation as well introduce robust training methods.
 
 ---
 
