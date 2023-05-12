@@ -6,7 +6,7 @@
     Music "Demixing" with Band-Split Recurrent Neural Network
 </h1>
 
-The repository has been modified from [Amantur Amatov](https://github.com/amanteur/BandSplitRNN-Pytorch) and is an unofficial PyTorch implementation of the 2022 paper [Music Source Separation with Band-split RNN](https://arxiv.org/pdf/2209.15174.pdf) with some additional modifications to compete in the [Sound Demixing Challenge (2023)]([https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23) - ["Label Noise" Track](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/leaderboards?challenge_leaderboard_extra_id=1286&challenge_round_id=1278). Huge thank you to both for developing and promoting this work!
+The repository has been modified from [Amantur Amatov](https://github.com/amanteur/BandSplitRNN-Pytorch) and is an unofficial PyTorch implementation of the 2022 paper [Music Source Separation with Band-split RNN](https://arxiv.org/pdf/2209.15174.pdf) with some additional modifications to compete in the [Sound Demixing Challenge (2023)](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23) - ["Label Noise" Track](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/leaderboards?challenge_leaderboard_extra_id=1286&challenge_round_id=1278). Huge thank you to both for developing and promoting this work!
 
 #### "Label Noise" Competition Results:
 <div style="text-align:center">
