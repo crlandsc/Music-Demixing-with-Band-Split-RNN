@@ -6,7 +6,7 @@
     Music "Demixing" with Band-Split Recurrent Neural Network
 </h1>
 
-The repository has been modified from [Amantur Amatov](https://github.com/amanteur/BandSplitRNN-Pytorch) and is an unofficial PyTorch implementation of the 2022 paper [Music Source Separation with Band-split RNN](https://arxiv.org/pdf/2209.15174.pdf) with some additional modifications to compete in the [Sound Demixing Challenge (2023)](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23) - ["Label Noise" Track](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/leaderboards?challenge_leaderboard_extra_id=1286&challenge_round_id=1278). Huge thank you to both for developing and promoting this work!
+The repository has been modified from [Amantur Amatov](https://github.com/amanteur/BandSplitRNN-Pytorch) and is an unofficial PyTorch implementation of the 2022 paper [Music Source Separation with Band-split RNN](https://arxiv.org/pdf/2209.15174.pdf) (BSRNN) with some additional modifications to compete in the [Sound Demixing Challenge (2023)](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23) - ["Label Noise" Track](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/leaderboards?challenge_leaderboard_extra_id=1286&challenge_round_id=1278). Huge thank you to both for developing and promoting this work!
 
 #### "Label Noise" Competition Results:
 <div style="text-align:center">
@@ -21,24 +21,25 @@ The repository has been modified from [Amantur Amatov](https://github.com/amante
 
 1. [Problem Statement](#problem-statement)
 2. [Background](#background)
-3. [Architecture](#architecture)
-4. [Datasets](#datasets)
-5. [Exploratory Data Analysis (EDA)](#eda)
-6. [Dependencies](#dependencies)
-7. [Inference](#inference)
-8. [Train your model](#trainmodel)
+3. [Datasets](#datasets)
+4. [Exploratory Data Analysis (EDA)](#eda)
+5. [Architecture](#architecture)
+6. [Conclusions](#conclusions)
+7. [Dependencies](#dependencies)
+8. [Inference](#inference)
+9. [Train your model](#trainmodel)
    1. [Dataset preprocessing](#preprocessing)
    2. [Training](#train)
    3. [Evaluation](#eval)
-9. [Repository structure](#structure)
-10. [Citing](#cite)
+10. [Repository structure](#structure)
+11. [Citing](#cite)
 
 ---
 
 <a name="problem-statement"/>
 
 ## Problem Statement
-Audio source separation has been a topic of interest for quite some time, but has gained increasing attention recently due an increase in computing power and the capabilities of neural networks. Source separation can be implemented for a number of purposes, including to improve speech clarity in noisy environment or, in our case, separate individual instruments from a song. There are many use cases for this technology, like music remixing, music information retrieval, and music education. This work seeks to review and improve upon current methods of audio source separation as well introduce robust training methods.
+Audio source separation has been a topic of interest for quite some time, but has gained increasing attention recently due an increase in computing power and the capabilities of neural networks. Source separation can be implemented for a number of purposes, including speech clarity improvement, noise cancellation, or in our case separating individual instruments from a song. There are many use cases for this instrument separation technology, like music remixing, music information retrieval, and music education. This work seeks to review and improve upon current methods of audio source separation as well introduce robust training methods for circumstances when training data is "noisy" or not entirely clean.
 
 ---
 
@@ -88,17 +89,15 @@ Since 2018, there have been many improvements on methods of source separation us
 
 ---
 
-<a name="architecture"/>
-
-## Architecture
-![architecture](images/architecture.png)
-
----
-
 <a name="datasets"/>
 
 ## Datasets
-The raw audio dataset is provided from [MUSDB18](https://paperswithcode.com/dataset/musdb18) and are organized into "vocals", "drums", "bass", and "other" stem files and "mixture" fully mixed track.
+
+#### General
+The raw audio dataset all of these models were tested on is the [MUSDB18](https://paperswithcode.com/dataset/musdb18) dataset. Each song is organized into "vocals", "drums", "bass", and "other" stem files and "mixture" fully mixed track.
+
+#### Music Demixing 23 "Label Noise" Track
+For the "Label Noise" MDX track, a separate private dataset was provided that had been artificially manipulated to simulate "un-clean" data. For example, a track that may be labeled "bass" could actually be a recording of drums. Or a vocal track may "accidentally" have the hi hat and guitar mixed in. The manipulation was random and varied so that manual processing of these tracks was not feasible. This was done in order to promote the development of a model and training method robust to noisy data.
 
 ---
 <a name="eda"/>
@@ -140,6 +139,64 @@ The raw audio dataset is provided from [MUSDB18](https://paperswithcode.com/data
 <div style="text-align:center;">
   <img src="./images/spectrograms.png" alt="waveforms" width="90%">
 </div>
+
+---
+
+<a name="architecture"/>
+
+## Architecture
+
+This section details the architecture of the entire system. The model framework consists of 3 modules:
+1. Band-split module
+2. Band and sequence separation modeling module
+3. Mask estimation module
+
+Being that it is a fairly complex structure, each module will be described in detail in order to create a total understanding of the BSRNN framework.
+
+### Band-split Module
+![architecture](images/band-split_module.png)
+
+In the first module, audio is converted to a spectrogram by the short-time Fourier transform (STFT). The spectrogram is then split into sub-bands. The number of sub-bands and their bandwidth can be adjusted to bias the system separately for each target instrument. Sub-bands are then normalized and sent through one fully-connected dense layer per band. Dense layers are then merged to be sent through the next module
+
+
+### Band and Sequence Separation Modeling Module
+![architecture](images/band_and_sequence_separation_modeling_module.png)
+
+In the second module, the data is fed through a pair of RNNs, which consists of normalization, a bi-directional LSTM (long short term memory network) and the a fully connected layer. The first RNN is fed with the data across the time dimension and the second is fed with the data across the frequency band dimension. This pair of RNNs can be repeated multiple times to improve the complexity that the network can learn. For example, this implementation used 12 layers per the paper specifications. The data is then combined and moves on to the final module.
+
+### Mask Estimation Module
+![architecture](images/mask_estimation_module.png)
+
+In the final module, the data is band-split again, normalized, and sent through an multi-layer perceptron (MLP - 1 in, 1 hidden, 1 out) per band with the hyperbolic tangent activation function. This produces a spectrogram “mask” that is then multiplied by the original signal to generate the target spectrogram. This is then compared to the training data and the loss is calculated and backpropagated through the network to update all weights.
+
+
+### Full Architecture
+![architecture](images/architecture_full.png)
+
+---
+
+<a name="conclusions"/>
+
+## Conclusions
+This Band-Split RNN framework offers high performance with both optimized training data as well as “noisy” training data. This is because the model can be biased with knowledge about characteristics of instruments. This is a recently published novel framework and still has a great deal of possible tuning, particularly regarding instruments other than vocals.
+
+Some of the reasons for reduction in performance for the MDX-23 Label Noise competition include:
+- Limited resources (single GPU)
+- Limited implementation and training time
+- Not enough preprocessing & cleaning of training data
+- No hyperparameter tuning
+
+### Methods for improvement
+- The 4 sources of Vocals, Bass, Drums, and Other are not all-encompassing.
+- Create datasets that consist of more diverse stems (e.g. acoustic guitar, strings, etc.)
+- Better choice of band-splitting (currently determined through rough grid-search)
+- Improved pre-processing pipeline
+  - E.g. Use another model to classify instruments and filter appropriately to clean training data
+- Tune hyperparameters:
+  - Frame size (how much audio is analysis at a time: Used 3 seconds
+  - Hop size (spacing between frames, aka overlap): 2.5 seconds
+  - Adjust dimensions in Band Split and Mask Estimation modules
+  - Adjust dimensions and number of BLSTM layers in Band and Sequence module
 
 ---
 
@@ -222,7 +279,7 @@ In this section, the model training pipeline is described.
 
 ### Dataset preprocessing
 
-The authors used the `MUSDB18-HQ` dataset to train an initial source separation model.
+The paper authors used the `MUSDB18-HQ` dataset to train an initial source separation model.
 You can access it via [Zenodo](https://zenodo.org/record/3338373#.Y_jrMC96D5g).
 
 After downloading, set the path to this dataset as an environmental variable 
@@ -340,16 +397,28 @@ The structure of this repository is as following:
 │   │   └── pl_model.py             - file with Pytorch-Lightning Module for training and validation pipeline
 │   ├── notebooks                   - directory with notebooks for audio pre-processing
 │   │   └── *.py
+│   ├── saved_models                - directory with model checkpoints and hyper-parameters for inference
+│   │   ├── bass
+│   │   │   ├── bass.ckpt
+│   │   │   └── hparams.yaml
+│   │   ├── drums
+│   │   │   ├── drums.ckpt
+│   │   │   └── hparams.yaml
+│   │   ├── other
+│   │   │   ├── other.ckpt
+│   │   │   └── hparams.yaml
+│   │   └── vocals
+│   │       ├── vocals.ckpt
+│   │       └── hparams.yaml
 │   ├── utils                       - directory with utilities for evaluation and inference pipelines
-│   │   └── *.py                    
+│   │   └── *.py
 │   ├── evaluate.py                 - script for evaluation pipeline 
 │   ├── inference.py                - script for inference pipeline
 │   ├── prepare_dataset.py          - script for dataset preprocessing pipeline
 │   ├── separator.py                - separator class, which is used in evaluation and inference pipelines
 │   └── train.py                    - script for training pipeline
-├── example                         - test example for inference.py
-│   └── *.wav
 ├── images
+├── presentation
 ├── .gitignore
 ├── README.md 
 └── requirement.txt
