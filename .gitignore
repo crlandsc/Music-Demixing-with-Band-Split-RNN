@@ -12,6 +12,7 @@ inference_script.txt
 train_scripts.txt
 env_vars.txt
 
+
 # ignore checkpoint files due to their large size
 *.pt
 *.pth
