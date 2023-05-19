@@ -1,7 +1,0 @@
-python3 prepare_dataset.py\
-    --input-dir /home/crlandsc/external/I/MDX-23/A_Label_Noise_Processed/\
-    --output-dir ./files/\
-    --subset train\
-    --split train\
-    --sad-cfg-path ./conf/sad/default.yaml\
-    --target vocals

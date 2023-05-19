@@ -1,4 +1,0 @@
-python3 evaluate.py\
-    -d logs/bandsplitrnn/2023-04-16_13-39\
-    --device cuda
-    
