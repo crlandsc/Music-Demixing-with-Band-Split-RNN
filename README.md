@@ -227,20 +227,24 @@ export CUDA_VISIBLE_DEVICES={DEVICE_NUM}
 
 ## Inference
 
-To run inference on your file(s), firstly, you need to download checkpoints.
+To run inference on your file(s), firstly, you need train your own model or download checkpoints.
+
+Current checkpoints were trained *only* on the ["Label Noise"](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/dataset_files) data from AIcrowd. These checkpoints were limited due to computing resources and time for the MDX competition. Further training would improve performance.
+
+To improve results to match the BSRNN paper, the model must be trained on clean MUSDB18 data and additional fine-tuning data.
 
 Available checkpoints:
 
-| Target | Epoch | uSDR | cSDR |
-|---|---|---|---|
-| Vocals | - | - | - |
-| Bass | - | - | - |
-| Drums | - | - | - |
-| Other | - | - | - |
+| Target | Approx.  Size | Epoch | SDR |
+|---| --- | ---|---|---|
+| [Vocals](https://drive.google.com/drive/folders/1ewwSSw9PQXxbwGueGIO28um4KeeRZerV?usp=sharing) | 500MB | 246 | 6.262 |
+| [Bass](https://drive.google.com/drive/folders/1YB8_q67zMD2-FxQM7HBJOwfkLT4x7OBv?usp=sharing) | 500MB | 296 | 5.605 |
+| [Drums](https://drive.google.com/drive/folders/1xD0mabn6R0oi0dm7zM870FIjP-Ks8BSU?usp=share_link) | 500MB | 212 | 4.831 |
+| [Other](https://drive.google.com/drive/folders/1ecv_YsXoArGkLpnzVyY5zaSkscunS1y0?usp=share_link) | 500MB | 218 | 3.268	 |
 
-After you download the `.pt` file, put it into `./saved_models/{TARGET}/` directory.
+After you download the `.pt` or `.ckpt` file, put it into `./saved_models/{TARGET}/` directory.
 
-Afterwards, run the following script: 
+Afterwards, run the following shell script: 
 
 ```
 python3 inference.py [-h] -i IN_PATH -o OUT_PATH [-t TARGET] [-c CKPT_PATH] [-d DEVICE]
@@ -273,8 +277,6 @@ and at this moment I've trained only (pretty bad) vocals extraction model.
 
 In this section, the model training pipeline is described.
 
----
-
 <a name="preprocessing"/>
 
 ### Dataset preprocessing
@@ -282,15 +284,17 @@ In this section, the model training pipeline is described.
 The paper authors used the `MUSDB18-HQ` dataset to train an initial source separation model.
 You can access it via [Zenodo](https://zenodo.org/record/3338373#.Y_jrMC96D5g).
 
+This version of the model was trained on the ["Label Noise"](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/dataset_files) data from AIcrowd.
+
 After downloading, set the path to this dataset as an environmental variable 
 (you'll need to specify it before running the `train` and `evaluation` pipelines):
 ```
 export MUSDB_DIR={MUSDB_DIR}
 ```
 
-To speed up the training process, instead of loading whole files, 
+To speed up the training process, instead of loading entire files, 
 we can precompute the indices of fragments we need to extract. 
-To select these indices, the proposed Source Activity Detection algorithm was used.
+To select these indices, the proposed Source Activity Detection (SAD) algorithm was used.
 
 To read the `musdb18` dataset and extract salient fragments according to the `target` source, use the following script:
 ```
