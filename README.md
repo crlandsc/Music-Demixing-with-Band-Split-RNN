@@ -235,8 +235,8 @@ To improve results to match the BSRNN paper, the model must be trained on clean 
 
 Available checkpoints:
 
-| Target | Approx.  Size | Epoch | SDR |
-|---| --- | ---|---|---|
+| Target | Approx. Size | Epoch | SDR |
+|---|---|---|---|
 | [Vocals](https://drive.google.com/drive/folders/1ewwSSw9PQXxbwGueGIO28um4KeeRZerV?usp=sharing) | 500MB | 246 | 6.262 |
 | [Bass](https://drive.google.com/drive/folders/1YB8_q67zMD2-FxQM7HBJOwfkLT4x7OBv?usp=sharing) | 500MB | 296 | 5.605 |
 | [Drums](https://drive.google.com/drive/folders/1xD0mabn6R0oi0dm7zM870FIjP-Ks8BSU?usp=share_link) | 500MB | 212 | 4.831 |
