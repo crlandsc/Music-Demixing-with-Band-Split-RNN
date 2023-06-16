@@ -227,20 +227,20 @@ export CUDA_VISIBLE_DEVICES={DEVICE_NUM}
 
 ## Inference
 
-To run inference on your file(s), firstly, you need train your own model or download checkpoints.
+To run inference (demix) on audio file(s), firstly, you need to train your own model or download checkpoints.
 
 Current checkpoints were trained *only* on the ["Label Noise"](https://www.aicrowd.com/challenges/sound-demixing-challenge-2023/problems/music-demixing-track-mdx-23/dataset_files) data from AIcrowd. These checkpoints were limited due to computing resources and time for the MDX competition. Further training would improve performance.
 
 To improve results to match the BSRNN paper, the model must be trained on clean MUSDB18 data and additional fine-tuning data.
 
-Available checkpoints:
+Available checkpoints (via Hugging Face):
 
 | Target | Approx. Size | Epoch | SDR |
 |---|---|---|---|
-| [Vocals](https://drive.google.com/drive/folders/1ewwSSw9PQXxbwGueGIO28um4KeeRZerV?usp=sharing) | 500MB | 246 | 6.262 |
-| [Bass](https://drive.google.com/drive/folders/1YB8_q67zMD2-FxQM7HBJOwfkLT4x7OBv?usp=sharing) | 500MB | 296 | 5.605 |
-| [Drums](https://drive.google.com/drive/folders/1xD0mabn6R0oi0dm7zM870FIjP-Ks8BSU?usp=share_link) | 500MB | 212 | 4.831 |
-| [Other](https://drive.google.com/drive/folders/1ecv_YsXoArGkLpnzVyY5zaSkscunS1y0?usp=share_link) | 500MB | 218 | 3.268	 |
+| [Vocals](https://huggingface.co/crlandsc/bsrnn-vocals) | 500MB | 246 | 6.262 |
+| [Bass](https://huggingface.co/crlandsc/bsrnn-bass) | 500MB | 296 | 5.605 |
+| [Drums](https://huggingface.co/crlandsc/bsrnn-drums) | 500MB | 212 | 4.831 |
+| [Other](https://huggingface.co/crlandsc/bsrnn-other) | 500MB | 218 | 3.268	 |
 
 After you download the `.pt` or `.ckpt` file, put it into `./saved_models/{TARGET}/` directory.
 
