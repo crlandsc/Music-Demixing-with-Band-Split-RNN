@@ -20,11 +20,14 @@
 *.pyo    binary export-ignore
 *.pyd    binary
 
+src/ linguist-vendored
+*.ipynb linguist-documentation
+
 # Python files
 # ============
-*.py     linguist-language=Python
+# *.py     linguist-language=Python
 
 # Jupyter Notebook
 # ============
-*.ipynb linguist-detectable=false
+# *.ipynb linguist-documentation
 *.ipynb  text eol=lf
