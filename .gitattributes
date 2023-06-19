@@ -22,8 +22,8 @@
 
 # Linguist Vendored
 # ============
-src/* linguist-vendored
-# notebooks/ linguist-vendored
+src/ linguist-vendored
+notebooks/ linguist-vendored
 
 # Jupyter Notebook
 # ============
