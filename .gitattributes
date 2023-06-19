@@ -23,9 +23,7 @@
 # Linguist Vendored
 # ============
 src/ linguist-vendored
-notebooks/ linguist-vendored
 
 # Jupyter Notebook
 # ============
-# *.ipynb linguist-documentation
 *.ipynb  text eol=lf
