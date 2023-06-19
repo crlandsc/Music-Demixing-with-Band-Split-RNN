@@ -26,5 +26,5 @@
 
 # Jupyter Notebook
 # ============
-*.ipynb  linguist-language=Jupyter Notebook
+notebooks/** linguist-vendored
 *.ipynb  text eol=lf
