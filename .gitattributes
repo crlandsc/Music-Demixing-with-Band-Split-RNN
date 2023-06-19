@@ -26,5 +26,5 @@
 
 # Jupyter Notebook
 # ============
-*.ipynb linguist-vendored=false # to correct github language detection
+*.ipynb linguist-detectable=false
 *.ipynb  text eol=lf
